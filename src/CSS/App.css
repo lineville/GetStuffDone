@@ -1,0 +1,31 @@
+.App {
+  text-align: center;
+}
+
+.App-header {
+  background-color: #222;
+  height: 60px;
+  padding: 20px;
+  color: white;
+}
+
+.App-title {
+  font-size: 1.5em;
+}
+
+.App-intro {
+  font-size: large;
+}
+
+#addbutton {
+  margin-left: 15px;
+  margin-right: 15px;
+}
+
+.list {
+  text-align: center;
+}
+
+.logout {
+  float: right;
+}
