@@ -15,6 +15,7 @@ import {
 } from '@material-ui/core'
 import { Delete as DeleteIcon, Edit as EditIcon } from '@material-ui/icons'
 import MaterialUIForm from 'material-ui-form'
+import Spinner from 'react-spinkit'
 import Notification from './Notification'
 import '../CSS/App.css'
 
@@ -34,13 +35,14 @@ class Task extends Component {
 
   async componentDidMount() {
     await this.setState({
-      item: this.props.item,
+      // item: this.props.item,
       user: this.props.user,
     })
-    db.collection('users')
+    await db
+      .collection('users')
       .doc(this.state.user.id)
       .collection('tasks')
-      .doc(this.state.item.id)
+      .doc(this.props.item.id)
       .onSnapshot(snapshot => {
         this.setState({
           item: { id: snapshot.id, ...snapshot.data() },
@@ -97,7 +99,9 @@ class Task extends Component {
   }
 
   render() {
-    return (
+    console.log(this.state.item.task, this.state.item.completed)
+    console.log(Object.values(this.state.item))
+    return Object.keys(this.state.item).length ? (
       <div>
         <ListItem role={undefined} dense button className="list-item">
           <Checkbox
@@ -158,6 +162,8 @@ class Task extends Component {
           />
         </Snackbar>
       </div>
+    ) : (
+      <Spinner name="ball-clip-rotate-multiple" color="primary" />
     )
   }
 }

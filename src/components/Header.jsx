@@ -31,15 +31,17 @@ class Header extends Component {
     return isLoggedIn ? (
       <AppBar position="static" color="secondary">
         <Toolbar>
-          <Button
-            variant="extendedFab"
-            aria-label="Download"
-            color="primary"
-            className={classes.button}
-          >
-            <DownloadIcon className={classes.extendedIcon} />
-            Download
-          </Button>
+          <a href="../../out/make/getstuffdone-0.1.0.dmg" download>
+            <Button
+              variant="extendedFab"
+              aria-label="Download"
+              color="primary"
+              className={classes.button}
+            >
+              <DownloadIcon className={classes.extendedIcon} />
+              Download
+            </Button>
+          </a>
           <Typography variant="title" color="primary" className={classes.flex}>
             Get Stuff Done
           </Typography>

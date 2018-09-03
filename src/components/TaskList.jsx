@@ -5,6 +5,7 @@ import { withAuth } from 'fireview'
 import PropTypes from 'prop-types'
 import { withStyles } from '@material-ui/core/styles'
 import { List, Snackbar, Typography, Paper } from '@material-ui/core'
+import Spinner from 'react-spinkit'
 import Task from './Task'
 import Notification from './Notification'
 import CreateTask from './CreateTask'
@@ -20,10 +21,12 @@ class TaskList extends Component {
       snackBarOpen: false,
       snackBarVariant: '',
       snackBarMessage: '',
+      isLoading: false,
     }
   }
 
   async componentDidMount() {
+    this.setState({ isLoading: true })
     const user = await firebase.auth().currentUser
     await db
       .collection('users')
@@ -44,6 +47,7 @@ class TaskList extends Component {
             })
           })
       })
+    this.setState({ isLoading: false })
   }
 
   handleDelete = task => {
@@ -98,6 +102,15 @@ class TaskList extends Component {
 
   render() {
     const { classes } = this.props
+    if (this.state.isLoading) {
+      return (
+        <Spinner
+          name="ball-clip-rotate-multiple"
+          color="primary"
+          className="center"
+        />
+      )
+    }
     return this.state.tasks.length ? (
       <div>
         <CreateTask />
@@ -141,6 +154,11 @@ class TaskList extends Component {
             working!
           </Typography>
         </Paper>
+        <Spinner
+          name="ball-clip-rotate-multiple"
+          color="primary"
+          className="center"
+        />
       </div>
     )
   }
