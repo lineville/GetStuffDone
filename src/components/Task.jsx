@@ -124,6 +124,7 @@ class Task extends Component {
                     id="task"
                     name="newTask"
                     label="Task"
+                    placeholder={this.state.item.task}
                     type="task"
                     fullWidth
                     onChange={this.handleChange}

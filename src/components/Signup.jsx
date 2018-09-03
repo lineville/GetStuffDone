@@ -13,6 +13,7 @@ import {
   Typography,
   Snackbar,
 } from '@material-ui/core/'
+import MaterialUIForm from 'material-ui-form'
 import Notification from './Notification'
 import styles from '../CSS/login'
 
@@ -78,7 +79,10 @@ class Signup extends Component {
     const { classes } = this.props
     return (
       <div>
-        <form onSubmit={this.handleLogin} className={classes.container}>
+        <MaterialUIForm
+          onSubmit={this.handleLogin}
+          className={classes.container}
+        >
           <FormControl>
             <TextField
               id="email-input"
@@ -115,7 +119,7 @@ class Signup extends Component {
             Already have an account?
             <a href="/login"> Login</a>
           </Typography>
-        </form>
+        </MaterialUIForm>
         <Snackbar
           anchorOrigin={{
             vertical: 'bottom',

@@ -2,11 +2,14 @@ import React, { Component } from 'react'
 import db from '../firestore'
 import firebase from 'firebase'
 import { withAuth } from 'fireview'
-import { List, Snackbar } from '@material-ui/core'
+import PropTypes from 'prop-types'
+import { withStyles } from '@material-ui/core/styles'
+import { List, Snackbar, Typography, Paper } from '@material-ui/core'
 import Task from './Task'
 import Notification from './Notification'
 import CreateTask from './CreateTask'
 import '../CSS/App.css'
+import styles from '../CSS/tasklist'
 
 class TaskList extends Component {
   constructor(props) {
@@ -94,7 +97,8 @@ class TaskList extends Component {
   }
 
   render() {
-    return (
+    const { classes } = this.props
+    return this.state.tasks.length ? (
       <div>
         <CreateTask />
         <List>
@@ -128,8 +132,22 @@ class TaskList extends Component {
           />
         </Snackbar>
       </div>
+    ) : (
+      <div>
+        <CreateTask />
+        <Paper elevation={1} className={classes.root}>
+          <Typography variant="title" color="secondary">
+            You have nothing to complete right now, add some tasks and get
+            working!
+          </Typography>
+        </Paper>
+      </div>
     )
   }
 }
 
-export default withAuth(TaskList)
+TaskList.propTypes = {
+  classes: PropTypes.object.isRequired,
+}
+
+export default withStyles(styles)(withAuth(TaskList))

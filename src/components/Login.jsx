@@ -4,7 +4,14 @@ import { withAuth } from 'fireview'
 import { withRouter } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import { withStyles } from '@material-ui/core/styles'
-import { FormControl, Button, TextField, Snackbar } from '@material-ui/core'
+import {
+  FormControl,
+  Button,
+  TextField,
+  Snackbar,
+  Typography,
+  Divider,
+} from '@material-ui/core'
 import Notification from './Notification'
 import styles from '../CSS/login'
 
@@ -89,6 +96,11 @@ class Login extends Component {
           >
             Login
           </Button>
+          <Divider />
+          <Typography>
+            First time user?
+            <a href="/signup"> Signup</a>
+          </Typography>
         </form>
 
         <Snackbar
