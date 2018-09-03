@@ -27,6 +27,15 @@ const styles = theme => ({
   margin: {
     margin: theme.spacing.unit,
   },
+  button: {
+    margin: theme.spacing.unit,
+  },
+  leftIcon: {
+    marginRight: theme.spacing.unit,
+  },
+  rightIcon: {
+    marginLeft: theme.spacing.unit,
+  },
 })
 
 export default styles

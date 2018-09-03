@@ -9,6 +9,12 @@ const theme = createMuiTheme({
     primary: {
       main: '#21c3ef',
     },
+    secondary: {
+      main: '#222222',
+    },
+    bright: {
+      main: '#414654',
+    },
   },
   typography: {
     fontFamily: ['Source Sans Pro', 'Roboto Condensed', 'sans-serif'].join(','),

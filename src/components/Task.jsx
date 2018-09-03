@@ -104,6 +104,7 @@ class Task extends Component {
             checked={this.state.item.completed}
             tabIndex={-1}
             disableRipple
+            color="primary"
             onClick={() => this.props.toggleChecked(this.state.item)}
           />
           <ListItemText primary={this.state.item.task} />
