@@ -4,7 +4,7 @@ import firebase from 'firebase'
 import { withAuth } from 'fireview'
 import PropTypes from 'prop-types'
 import { withStyles } from '@material-ui/core/styles'
-import { List, Snackbar, Typography, Paper } from '@material-ui/core'
+import { List, Snackbar, Typography, Paper, Tabs, Tab } from '@material-ui/core'
 import Spinner from 'react-spinkit'
 import Task from './Task'
 import Notification from './Notification'
@@ -18,6 +18,7 @@ class TaskList extends Component {
     this.state = {
       tasks: [],
       user: {},
+      filter: 0,
       snackBarOpen: false,
       snackBarVariant: '',
       snackBarMessage: '',
@@ -100,6 +101,22 @@ class TaskList extends Component {
     })
   }
 
+  handleChange = (event, value) => {
+    this.setState({
+      filter: value,
+    })
+  }
+
+  filterTasks = tasks => {
+    if (this.state.filter === 1) {
+      return tasks.filter(task => task.completed)
+    } else if (this.state.filter === 2) {
+      return tasks.filter(task => !task.completed)
+    } else {
+      return tasks
+    }
+  }
+
   render() {
     const { classes } = this.props
     if (this.state.isLoading) {
@@ -114,8 +131,19 @@ class TaskList extends Component {
     return this.state.tasks.length ? (
       <div>
         <CreateTask />
+        <Tabs
+          value={this.state.filter}
+          onChange={this.handleChange}
+          indicatorColor="primary"
+          textColor="primary"
+          centered
+        >
+          <Tab label="All" />
+          <Tab label="Completed" />
+          <Tab label="Incomplete" />
+        </Tabs>
         <List>
-          {this.state.tasks.map(item => {
+          {this.filterTasks(this.state.tasks).map(item => {
             return (
               <Task
                 key={item.id}
