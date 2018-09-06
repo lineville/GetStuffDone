@@ -99,8 +99,6 @@ class Task extends Component {
   }
 
   render() {
-    console.log(this.state.item.task, this.state.item.completed)
-    console.log(Object.values(this.state.item))
     return Object.keys(this.state.item).length ? (
       <div>
         <ListItem role={undefined} dense button className="list-item">

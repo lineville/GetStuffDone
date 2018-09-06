@@ -1,11 +1,5 @@
 import React, { Component } from 'react'
-import {
-  Typography,
-  Button,
-  AppBar,
-  Toolbar,
-  IconButton,
-} from '@material-ui/core/'
+import { Typography, Button, AppBar, Toolbar } from '@material-ui/core/'
 import { GetApp as DownloadIcon, Input as LogoutIcon } from '@material-ui/icons'
 import PropTypes from 'prop-types'
 import { withStyles } from '@material-ui/core/styles'
