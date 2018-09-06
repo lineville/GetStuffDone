@@ -62,6 +62,16 @@
         {
           "name": "@electron-forge/maker-dmg",
           "config": {}
+        },
+        {
+          "name": "@electron-forge/publisher-github",
+          "config": {
+            "repository": {
+              "owner": "lineville",
+              "name": "GetStuffDone"
+            },
+            "prerelease": true
+          }
         }
       ]
     }

@@ -25,7 +25,7 @@ class Header extends Component {
     return isLoggedIn ? (
       <AppBar position="static" color="secondary">
         <Toolbar>
-          <a href="../../out/make/getstuffdone-0.1.0.dmg" download>
+          <a href="https://github.com/lineville/GetStuffDone">
             <Button
               variant="extendedFab"
               aria-label="Download"
