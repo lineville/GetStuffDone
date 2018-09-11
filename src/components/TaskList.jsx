@@ -5,6 +5,7 @@ import { withAuth } from 'fireview'
 import PropTypes from 'prop-types'
 import { withStyles } from '@material-ui/core/styles'
 import { List, Snackbar, Typography, Paper, Tabs, Tab } from '@material-ui/core'
+import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd'
 import Spinner from 'react-spinkit'
 import Task from './Task'
 import Notification from './Notification'
@@ -107,6 +108,31 @@ class TaskList extends Component {
     })
   }
 
+  reorder = (list, startIndex, endIndex) => {
+    const result = Array.from(list)
+    const [removed] = result.splice(startIndex, 1)
+    result.splice(endIndex, 0, removed)
+
+    return result
+  }
+
+  onDragEnd = result => {
+    // dropped outside the list
+    if (!result.destination) {
+      return
+    }
+
+    const tasks = this.reorder(
+      this.state.tasks,
+      result.source.index,
+      result.destination.index
+    )
+
+    this.setState({
+      tasks,
+    })
+  }
+
   filterTasks = tasks => {
     if (this.state.filter === 1) {
       return tasks.filter(task => task.completed)
@@ -142,21 +168,51 @@ class TaskList extends Component {
           <Tab label="Completed" />
           <Tab label="Incomplete" />
         </Tabs>
-        <List>
-          {this.filterTasks(this.state.tasks).map(item => {
-            return (
-              <Task
-                key={item.id}
-                item={item}
-                DataTransferItemList
-                className="list"
-                handleDelete={() => this.handleDelete(item)}
-                toggleChecked={() => this.toggleChecked(item)}
-                user={this.state.user}
-              />
-            )
-          })}
-        </List>
+        <DragDropContext onDragEnd={this.onDragEnd}>
+          <Droppable droppableId="droppable">
+            {(provided, snapshot) => (
+              <div ref={provided.innerRef}>
+                {this.filterTasks(this.state.tasks).map((item, index) => (
+                  <Draggable key={item.id} draggableId={item.id} index={index}>
+                    {(provided, snapshot) => (
+                      <div
+                        ref={provided.innerRef}
+                        {...provided.draggableProps}
+                        {...provided.dragHandleProps}
+                      >
+                        <Task
+                          key={item.id}
+                          item={item}
+                          DataTransferItemList
+                          className="list"
+                          handleDelete={() => this.handleDelete(item)}
+                          toggleChecked={() => this.toggleChecked(item)}
+                          user={this.state.user}
+                        />
+                      </div>
+                    )}
+                  </Draggable>
+                ))}
+                {provided.placeholder}
+              </div>
+            )}
+            {/* <List>
+              {this.filterTasks(this.state.tasks).map(item => {
+                return (
+                  <Task
+                    key={item.id}
+                    item={item}
+                    DataTransferItemList
+                    className="list"
+                    handleDelete={() => this.handleDelete(item)}
+                    toggleChecked={() => this.toggleChecked(item)}
+                    user={this.state.user}
+                  />
+                )
+              })}
+            </List> */}
+          </Droppable>
+        </DragDropContext>
         <Snackbar
           anchorOrigin={{
             vertical: 'bottom',
