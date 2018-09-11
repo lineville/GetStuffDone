@@ -22,6 +22,17 @@ const theme = createMuiTheme({
 })
 
 class App extends Component {
+  componentDidMount() {
+    const ele = document.getElementById('ipl-progress-indicator')
+    if (ele) {
+      // fade out
+      ele.classList.add('available')
+      setTimeout(() => {
+        // remove from DOM
+        ele.outerHTML = ''
+      }, 2000)
+    }
+  }
   render() {
     return (
       <div className="App">
