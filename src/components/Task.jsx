@@ -13,7 +13,11 @@ import {
   FormControl,
   Snackbar,
 } from '@material-ui/core'
-import { Delete as DeleteIcon, Edit as EditIcon } from '@material-ui/icons'
+import {
+  Delete as DeleteIcon,
+  Edit as EditIcon,
+  SwapVert as SwapIcon,
+} from '@material-ui/icons'
 import MaterialUIForm from 'material-ui-form'
 import Spinner from 'react-spinkit'
 import Notification from './Notification'
@@ -110,6 +114,7 @@ class Task extends Component {
             onClick={() => this.props.toggleChecked(this.state.item)}
           />
           <ListItemText primary={this.state.item.task} />
+          <SwapIcon />
           <IconButton aria-label="Edit" onClick={this.openForm}>
             <EditIcon />
           </IconButton>

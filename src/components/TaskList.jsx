@@ -196,21 +196,6 @@ class TaskList extends Component {
                 {provided.placeholder}
               </div>
             )}
-            {/* <List>
-              {this.filterTasks(this.state.tasks).map(item => {
-                return (
-                  <Task
-                    key={item.id}
-                    item={item}
-                    DataTransferItemList
-                    className="list"
-                    handleDelete={() => this.handleDelete(item)}
-                    toggleChecked={() => this.toggleChecked(item)}
-                    user={this.state.user}
-                  />
-                )
-              })}
-            </List> */}
           </Droppable>
         </DragDropContext>
         <Snackbar
