@@ -37,7 +37,7 @@ class Header extends Component {
             </Button>
           </a>
           <Typography variant="title" color="primary" className={classes.flex}>
-            Get Stuff Done
+            To Do's
           </Typography>
           <Button
             variant="extendedFab"
@@ -51,45 +51,9 @@ class Header extends Component {
         </Toolbar>
       </AppBar>
     ) : (
-      // <header className="App-header">
-      //   <Typography variant="display3" color="primary">
-      //     Get Stuff Done
-      //   </Typography>
-      //   <div className="logout">
-      //     <Button
-      //       variant="contained"
-      //       type="submit"
-      //       color="primary"
-      //       // className="logout"
-      //       onClick={this.handleLogout}
-      //     >
-      //       Logout
-      //     </Button>
-      //   </div>
-      //   <div className="logout">
-      //     <Button
-      //       variant="contained"
-      //       type="submit"
-      //       color="primary"
-      //       // className="logout"
-      //       onClick={this.handleLogout}
-      //     >
-      //       Logout
-      //     </Button>
-      //   </div>
-
-      //   {/* <a href="/getstuffdone-0.1.0.dmg" download>
-      //         <DownloadIcon />
-      //       </a> */}
-      // </header>
       <header className="App-header">
         <Typography variant="display3" color="primary">
-          Get Stuff Done
-          {/* <div className="logout">
-            <a href="/getstuffdone-0.1.0.dmg" download>
-              <DownloadIcon />
-            </a>
-          </div> */}
+          To Do's
         </Typography>
       </header>
     )

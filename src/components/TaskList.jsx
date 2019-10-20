@@ -4,7 +4,7 @@ import firebase from 'firebase'
 import { withAuth } from 'fireview'
 import PropTypes from 'prop-types'
 import { withStyles } from '@material-ui/core/styles'
-import { List, Snackbar, Typography, Paper, Tabs, Tab } from '@material-ui/core'
+import { Snackbar, Typography, Paper, Tabs, Tab } from '@material-ui/core'
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd'
 import Spinner from 'react-spinkit'
 import Task from './Task'
@@ -34,8 +34,8 @@ class TaskList extends Component {
       .collection('users')
       .doc(user.uid)
       .get()
-      .then(user => {
-        this.setState({ user: { id: user.id, ...user.data() } })
+      .then(fsUser => {
+        this.setState({ user: { id: fsUser.id, ...fsUser.data() } })
       })
       .then(() => {
         db.collection('users')
@@ -63,7 +63,7 @@ class TaskList extends Component {
           this.setState({
             snackBarOpen: true,
             snackBarVariant: 'success',
-            snackBarMessage: `Task deleted!`,
+            snackBarMessage: 'Task deleted!',
           })
         })
     } catch (error) {
@@ -138,9 +138,8 @@ class TaskList extends Component {
       return tasks.filter(task => task.completed)
     } else if (this.state.filter === 2) {
       return tasks.filter(task => !task.completed)
-    } else {
-      return tasks
     }
+    return tasks
   }
 
   render() {
