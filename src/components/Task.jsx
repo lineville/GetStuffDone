@@ -11,7 +11,7 @@ import {
   Button,
   TextField,
   FormControl,
-  Snackbar,
+  Snackbar
 } from '@material-ui/core'
 import {
   Delete as DeleteIcon,
@@ -22,6 +22,10 @@ import MaterialUIForm from 'material-ui-form'
 import Spinner from 'react-spinkit'
 import Notification from './Notification'
 import '../CSS/App.css'
+
+import StarIcon from '@material-ui/icons/Star';
+import StarBorderIcon from '@material-ui/icons/StarBorder';
+
 
 class Task extends Component {
   constructor(props) {
@@ -113,6 +117,10 @@ class Task extends Component {
             color="primary"
             onClick={() => this.props.toggleChecked(this.state.item)}
           />
+
+          {this.state.item.starred ? (<StarIcon color="primary" onClick={() => this.props.toggleStarred(this.state.item)}/>) :
+            (<StarBorderIcon color="default" onClick={() => this.props.toggleStarred(this.state.item)} />)}
+
           <ListItemText primary={this.state.item.task} />
           <SwapIcon />
           <IconButton aria-label="Edit" onClick={this.openForm}>
@@ -166,8 +174,8 @@ class Task extends Component {
         </Snackbar>
       </div>
     ) : (
-      <Spinner name="ball-clip-rotate-multiple" color="primary" />
-    )
+        <Spinner name="ball-clip-rotate-multiple" color="primary" />
+      )
   }
 }
 

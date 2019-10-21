@@ -93,6 +93,24 @@ class TaskList extends Component {
     }
   }
 
+  toggleStarred = item => {
+    try {
+      db.collection('users')
+      .doc(this.state.user.id)
+      .collection('tasks')
+      .doc(item.id)
+      .update({
+        starred: !item.starred,
+      })
+    } catch (error) {
+      this.setState({
+        snackBarOpen: true,
+        snackBarVariant: 'warning',
+        snackBarMessage: `Oops... ${error.message}`,
+      })
+    }
+  }
+
   handleClose = (event, reason) => {
     if (reason === 'clickaway') {
       return
@@ -134,12 +152,19 @@ class TaskList extends Component {
   }
 
   filterTasks = tasks => {
-    if (this.state.filter === 1) {
-      return tasks.filter(task => task.completed)
-    } else if (this.state.filter === 2) {
-      return tasks.filter(task => !task.completed)
+
+    switch (this.state.filter) {
+      case 1:
+        return tasks.filter(task => task.completed)
+      case 2:
+        return tasks.filter(task => !task.completed)
+      case 3:
+        return tasks.filter(task => task.starred)
+    
+      default:
+        return tasks
     }
-    return tasks
+
   }
 
   render() {
@@ -166,6 +191,7 @@ class TaskList extends Component {
           <Tab label="All" />
           <Tab label="Completed" />
           <Tab label="Incomplete" />
+          <Tab label="Starred" />
         </Tabs>
         <DragDropContext onDragEnd={this.onDragEnd}>
           <Droppable droppableId="droppable">
@@ -186,6 +212,7 @@ class TaskList extends Component {
                           className="list"
                           handleDelete={() => this.handleDelete(item)}
                           toggleChecked={() => this.toggleChecked(item)}
+                          toggleStarred={() => this.toggleStarred(item)}
                           user={this.state.user}
                         />
                       </div>

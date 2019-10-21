@@ -43,6 +43,7 @@ class CreateTask extends Component {
         .add({
           task: this.state.newTask,
           completed: false,
+          starred: false
         })
       this.setState({
         newTask: '',
@@ -70,6 +71,7 @@ class CreateTask extends Component {
               label="New Task"
               type="newTask"
               margin="normal"
+              width="100%"
               value={this.state.newTask}
               onChange={this.handleChange}
             />
@@ -80,6 +82,7 @@ class CreateTask extends Component {
             color="primary"
             aria-label="Add"
             id="addbutton"
+            size="medium"
             onClick={this.createTask}
           >
             <AddIcon />

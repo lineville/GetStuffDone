@@ -2,7 +2,6 @@
   "name": "getstuffdone",
   "version": "0.1.0",
   "main": "src/electron-starter.js",
-  "private": true,
   "dependencies": {
     "@material-ui/core": "^3.0.0",
     "@material-ui/icons": "^3.0.0",
