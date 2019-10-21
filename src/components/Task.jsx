@@ -119,7 +119,7 @@ class Task extends Component {
           />
 
           {this.state.item.starred ? (<StarIcon color="primary" onClick={() => this.props.toggleStarred(this.state.item)}/>) :
-            (<StarBorderIcon color="default" onClick={() => this.props.toggleStarred(this.state.item)} />)}
+            (<StarBorderIcon color="inherit" onClick={() => this.props.toggleStarred(this.state.item)} />)}
 
           <ListItemText primary={this.state.item.task} />
           <SwapIcon />
@@ -129,10 +129,10 @@ class Task extends Component {
           <IconButton aria-label="Delete" onClick={this.props.handleDelete}>
             <DeleteIcon />
           </IconButton>
-          <Dialog open={this.state.open} onClose={this.handleClose}>
-            <MaterialUIForm onSubmit={this.handleEdit}>
-              <DialogContent>
-                <FormControl>
+          <Dialog open={this.state.open} onClose={this.handleClose} fullWidth>
+            <MaterialUIForm onSubmit={this.handleEdit} fullWidth>
+              <DialogContent fullWidth>
+                <FormControl fullWidth>
                   <TextField
                     autoFocus
                     margin="dense"
@@ -143,6 +143,7 @@ class Task extends Component {
                     type="task"
                     fullWidth
                     onChange={this.handleChange}
+                    defaultValue={this.state.item.task}
                   />
                 </FormControl>
               </DialogContent>

@@ -11,15 +11,15 @@ const Routes = props => {
   return (
     <div>
       <Switch>
-        <Route exact path="/" component={Signup} />
+        <Route exact path="/" component={Login} />
         <Route path="/login" component={Login} />
+        <Route path="/signup" component={Signup} />
         {isLoggedIn && (
           <Switch>
             <Route path="/tasklist" component={TaskList} />
             <Route path="/tasklistdrag" component={TaskListDrag} />
           </Switch>
         )}
-        <Route path="/" component={Signup} />
       </Switch>
     </div>
   )

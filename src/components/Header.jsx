@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Typography, Button, AppBar, Toolbar } from '@material-ui/core/'
+import { Typography, AppBar, Toolbar, Fab } from '@material-ui/core/'
 import { GetApp as DownloadIcon, Input as LogoutIcon } from '@material-ui/icons'
 import PropTypes from 'prop-types'
 import { withStyles } from '@material-ui/core/styles'
@@ -26,28 +26,28 @@ class Header extends Component {
       <AppBar position="static" color="secondary">
         <Toolbar>
           <a href="https://github.com/lineville/GetStuffDone">
-            <Button
-              variant="extendedFab"
+            <Fab
+              variant="extended"
               aria-label="Download"
               color="primary"
               className={classes.button}
             >
               <DownloadIcon className={classes.extendedIcon} />
               Download
-            </Button>
+            </Fab>
           </a>
           <Typography variant="title" color="primary" className={classes.flex}>
             To Do's
           </Typography>
-          <Button
-            variant="extendedFab"
+          <Fab
+            variant="extended"
             aria-label="Logout"
             className={classes.button}
             onClick={this.handleLogout}
           >
             <LogoutIcon className={classes.extendedIcon} />
             Logout
-          </Button>
+          </Fab>
         </Toolbar>
       </AppBar>
     ) : (

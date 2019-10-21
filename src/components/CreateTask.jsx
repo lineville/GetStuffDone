@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import firebase from 'firebase'
 import db from '../firestore'
-import { FormControl, Button, TextField, Snackbar } from '@material-ui/core'
+import { FormControl, TextField, Snackbar, Fab } from '@material-ui/core'
 import MaterialUIForm from 'material-ui-form'
 import Notification from './Notification'
 import { Add as AddIcon } from '@material-ui/icons'
@@ -66,6 +66,7 @@ class CreateTask extends Component {
         <MaterialUIForm onSubmit={this.createTask}>
           <FormControl>
             <TextField
+              fullWidth
               id="newTask"
               name="newTask"
               label="New Task"
@@ -77,8 +78,8 @@ class CreateTask extends Component {
             />
           </FormControl>
 
-          <Button
-            variant="fab"
+          <Fab
+            variant="extended"
             color="primary"
             aria-label="Add"
             id="addbutton"
@@ -86,7 +87,7 @@ class CreateTask extends Component {
             onClick={this.createTask}
           >
             <AddIcon />
-          </Button>
+          </Fab>
         </MaterialUIForm>
         <Snackbar
           anchorOrigin={{
