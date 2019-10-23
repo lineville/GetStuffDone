@@ -8,7 +8,7 @@ import { withRouter } from 'react-router-dom'
 import firebase from 'firebase'
 import styles from '../CSS/header.js'
 import '../CSS/App.css'
-import GithubCorner from 'react-github-corner';
+import GithubCorner from 'react-github-corner'
 
 class Header extends Component {
   handleLogout = async () => {
@@ -32,28 +32,32 @@ class Header extends Component {
           <Button onClick={this.handleLogout}>
             <LogoutIcon className={classes.extendedIcon} color="primary" />
           </Button>
-          <GithubCorner direction="left" size="60" color="inherit" target="_blank" href="https://github.com/lineville/GetStuffDone/" />
-
-
+          <GithubCorner
+            direction="left"
+            size="60"
+            color="inherit"
+            target="_blank"
+            href="https://github.com/lineville/GetStuffDone/"
+          />
         </Toolbar>
       </AppBar>
     ) : (
-        <AppBar position="static" color="secondary">
-          <Toolbar>
-            <Typography variant="title" color="primary" className={classes.flex}>
-              To Do's
+      <AppBar position="static" color="secondary">
+        <Toolbar>
+          <Typography variant="title" color="primary" className={classes.flex}>
+            To Do's
           </Typography>
 
-
-            <GithubCorner direction="left" size="60" color="inherit" target="_blank" href="https://github.com/lineville/GetStuffDone/" />
-          </Toolbar>
-        </AppBar>
-        // <header className="App-header">
-        //   <Typography variant="display3" color="primary">
-        //     To Do's
-        // </Typography>
-        // </header>
-      )
+          <GithubCorner
+            direction="left"
+            size="60"
+            color="inherit"
+            target="_blank"
+            href="https://github.com/lineville/GetStuffDone/"
+          />
+        </Toolbar>
+      </AppBar>
+    )
   }
 }
 

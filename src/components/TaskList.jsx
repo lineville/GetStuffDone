@@ -4,7 +4,15 @@ import firebase from 'firebase'
 import { withAuth } from 'fireview'
 import PropTypes from 'prop-types'
 import { withStyles } from '@material-ui/core/styles'
-import { Snackbar, Typography, Paper, Tabs, Tab, Switch, FormControlLabel } from '@material-ui/core'
+import {
+  Snackbar,
+  Typography,
+  Paper,
+  Tabs,
+  Tab,
+  Switch,
+  FormControlLabel,
+} from '@material-ui/core'
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd'
 import Spinner from 'react-spinkit'
 import Task from './Task'
@@ -24,7 +32,7 @@ class TaskList extends Component {
       snackBarVariant: '',
       snackBarMessage: '',
       isLoading: false,
-      darkMode: true
+      darkMode: true,
     }
   }
 
@@ -153,7 +161,6 @@ class TaskList extends Component {
   }
 
   filterTasks = tasks => {
-
     switch (this.state.filter) {
       case 1:
         return tasks.filter(task => task.completed)
@@ -165,14 +172,13 @@ class TaskList extends Component {
       default:
         return tasks
     }
-
   }
 
-
-
   handleDarkModeToggle = event => {
-    document.body.style.backgroundColor = event.target.checked ? "black" : "white";
-    document.body.style.color = event.target.checked ? "white" : "black";
+    document.body.style.backgroundColor = event.target.checked
+      ? 'black'
+      : 'white'
+    document.body.style.color = event.target.checked ? 'white' : 'black'
     this.setState({
       darkMode: event.target.checked,
     })
@@ -194,8 +200,6 @@ class TaskList extends Component {
       <div>
         <CreateTask />
 
-
-
         <FormControlLabel
           control={
             <Switch
@@ -205,10 +209,9 @@ class TaskList extends Component {
               value={this.state.darkMode}
             />
           }
-          classes={{ root: { color: "inherit" }}}
+          classes={{ root: { color: 'inherit' } }}
           label="Dark Mode"
         />
-
 
         <Tabs
           value={this.state.filter}
@@ -270,21 +273,21 @@ class TaskList extends Component {
         </Snackbar>
       </div>
     ) : (
-        <div>
-          <CreateTask />
-          <Paper elevation={1} className={classes.root}>
-            <Typography variant="title" color="secondary">
-              You have nothing to complete right now, add some tasks and get
-              working!
+      <div>
+        <CreateTask />
+        <Paper elevation={1} className={classes.root}>
+          <Typography variant="title" color="secondary">
+            You have nothing to complete right now, add some tasks and get
+            working!
           </Typography>
-          </Paper>
-          <Spinner
-            name="ball-clip-rotate-multiple"
-            color="primary"
-            className="center"
-          />
-        </div>
-      )
+        </Paper>
+        <Spinner
+          name="ball-clip-rotate-multiple"
+          color="primary"
+          className="center"
+        />
+      </div>
+    )
   }
 }
 
