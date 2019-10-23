@@ -8,6 +8,8 @@ import { Add as AddIcon } from '@material-ui/icons'
 import '../CSS/App.css'
 
 class CreateTask extends Component {
+
+
   constructor() {
     super()
     this.state = {
@@ -23,6 +25,8 @@ class CreateTask extends Component {
       [event.target.name]: event.target.value,
     })
   }
+
+
 
   handleClose = (event, reason) => {
     if (reason === 'clickaway') {

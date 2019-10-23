@@ -3,7 +3,6 @@ import db from '../firestore'
 import {
   ListItem,
   ListItemText,
-  Checkbox,
   IconButton,
   Dialog,
   DialogActions,
@@ -11,7 +10,8 @@ import {
   Button,
   TextField,
   FormControl,
-  Snackbar
+  Snackbar,
+  Typography
 } from '@material-ui/core'
 import {
   Delete as DeleteIcon,
@@ -25,6 +25,8 @@ import '../CSS/App.css'
 
 import StarIcon from '@material-ui/icons/Star';
 import StarBorderIcon from '@material-ui/icons/StarBorder';
+import RadioButtonUncheckedOutlinedIcon from '@material-ui/icons/RadioButtonUncheckedOutlined';
+import CheckCircleOutlineOutlinedIcon from '@material-ui/icons/CheckCircleOutlineOutlined';
 
 
 class Task extends Component {
@@ -110,23 +112,30 @@ class Task extends Component {
     return Object.keys(this.state.item).length ? (
       <div>
         <ListItem role={undefined} dense button className="list-item">
-          <Checkbox
+          {/* Alternative checkbox for completed Toggle this with below */}
+          {/* <Checkbox
             checked={this.state.item.completed}
             tabIndex={-1}
             disableRipple
             color="primary"
             onClick={() => this.props.toggleChecked(this.state.item)}
-          />
+          /> */}
 
-          {this.state.item.starred ? (<StarIcon color="primary" onClick={() => this.props.toggleStarred(this.state.item)}/>) :
+          {this.state.item.completed ? (<CheckCircleOutlineOutlinedIcon color="primary" onClick={() => this.props.toggleChecked(this.state.item)} />)
+            : (<RadioButtonUncheckedOutlinedIcon color="inherit" onClick={() => this.props.toggleChecked(this.state.item)} />)}
+
+          {this.state.item.starred ? (<StarIcon color="primary" onClick={() => this.props.toggleStarred(this.state.item)} />) :
             (<StarBorderIcon color="inherit" onClick={() => this.props.toggleStarred(this.state.item)} />)}
 
-          <ListItemText primary={this.state.item.task} />
+
+          <ListItemText disableTypography>
+            <Typography color="inherit">{this.state.item.task}</Typography>
+          </ListItemText>
           <SwapIcon />
-          <IconButton aria-label="Edit" onClick={this.openForm}>
+          <IconButton aria-label="Edit" color="inherit" onClick={this.openForm}>
             <EditIcon />
           </IconButton>
-          <IconButton aria-label="Delete" onClick={this.props.handleDelete}>
+          <IconButton aria-label="Delete" color="inherit" onClick={this.props.handleDelete}>
             <DeleteIcon />
           </IconButton>
           <Dialog open={this.state.open} onClose={this.handleClose} fullWidth>

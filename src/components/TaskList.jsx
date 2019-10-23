@@ -4,7 +4,7 @@ import firebase from 'firebase'
 import { withAuth } from 'fireview'
 import PropTypes from 'prop-types'
 import { withStyles } from '@material-ui/core/styles'
-import { Snackbar, Typography, Paper, Tabs, Tab } from '@material-ui/core'
+import { Snackbar, Typography, Paper, Tabs, Tab, Switch, FormControlLabel } from '@material-ui/core'
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd'
 import Spinner from 'react-spinkit'
 import Task from './Task'
@@ -24,11 +24,12 @@ class TaskList extends Component {
       snackBarVariant: '',
       snackBarMessage: '',
       isLoading: false,
+      darkMode: true
     }
   }
 
   async componentDidMount() {
-    this.setState({ isLoading: true })
+    this.setState({ isLoading: true, darkMode: true })
     const user = await firebase.auth().currentUser
     await db
       .collection('users')
@@ -96,12 +97,12 @@ class TaskList extends Component {
   toggleStarred = item => {
     try {
       db.collection('users')
-      .doc(this.state.user.id)
-      .collection('tasks')
-      .doc(item.id)
-      .update({
-        starred: !item.starred,
-      })
+        .doc(this.state.user.id)
+        .collection('tasks')
+        .doc(item.id)
+        .update({
+          starred: !item.starred,
+        })
     } catch (error) {
       this.setState({
         snackBarOpen: true,
@@ -160,11 +161,22 @@ class TaskList extends Component {
         return tasks.filter(task => !task.completed)
       case 3:
         return tasks.filter(task => task.starred)
-    
+
       default:
         return tasks
     }
 
+  }
+
+
+
+  handleDarkModeToggle = event => {
+    document.body.style.backgroundColor = event.target.checked ? "black" : "white";
+    document.body.style.color = event.target.checked ? "white" : "black";
+    this.setState({
+      darkMode: event.target.checked,
+    })
+    console.log(this.state.darkMode)
   }
 
   render() {
@@ -181,11 +193,28 @@ class TaskList extends Component {
     return this.state.tasks.length ? (
       <div>
         <CreateTask />
+
+
+
+        <FormControlLabel
+          control={
+            <Switch
+              checked={this.state.darkMode}
+              onChange={this.handleDarkModeToggle}
+              color="primary"
+              value={this.state.darkMode}
+            />
+          }
+          classes={{ root: { color: "inherit" }}}
+          label="Dark Mode"
+        />
+
+
         <Tabs
           value={this.state.filter}
           onChange={this.handleChange}
           indicatorColor="primary"
-          textColor="primary"
+          textColor="inherit"
           centered
         >
           <Tab label="All" />
@@ -241,21 +270,21 @@ class TaskList extends Component {
         </Snackbar>
       </div>
     ) : (
-      <div>
-        <CreateTask />
-        <Paper elevation={1} className={classes.root}>
-          <Typography variant="title" color="secondary">
-            You have nothing to complete right now, add some tasks and get
-            working!
+        <div>
+          <CreateTask />
+          <Paper elevation={1} className={classes.root}>
+            <Typography variant="title" color="secondary">
+              You have nothing to complete right now, add some tasks and get
+              working!
           </Typography>
-        </Paper>
-        <Spinner
-          name="ball-clip-rotate-multiple"
-          color="primary"
-          className="center"
-        />
-      </div>
-    )
+          </Paper>
+          <Spinner
+            name="ball-clip-rotate-multiple"
+            color="primary"
+            className="center"
+          />
+        </div>
+      )
   }
 }
 
