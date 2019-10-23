@@ -182,7 +182,6 @@ class TaskList extends Component {
     this.setState({
       darkMode: event.target.checked,
     })
-    console.log(this.state.darkMode)
   }
 
   render() {
@@ -209,7 +208,6 @@ class TaskList extends Component {
               value={this.state.darkMode}
             />
           }
-          classes={{ root: { color: 'inherit' } }}
           label="Dark Mode"
         />
 
