@@ -11,3 +11,8 @@ a {
   color: #21c3ef;
   text-decoration: none;
 }
+
+.dark-mode {
+  /* background-color: black; */
+  color: white;
+}

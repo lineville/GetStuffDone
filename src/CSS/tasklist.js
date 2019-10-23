@@ -5,6 +5,9 @@ const styles = theme => ({
     paddingTop: theme.spacing.unit * 2,
     paddingBottom: theme.spacing.unit * 2,
   },
+  input: {
+    color: 'purple',
+  },
 })
 
 export default styles

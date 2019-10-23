@@ -5,6 +5,16 @@ import Routes from './Routes'
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles'
 
 const theme = createMuiTheme({
+  overrides: {
+    MuiInput: {
+      input: {
+        placeholder: {
+          color: 'purple',
+        },
+        color: 'black',
+      },
+    },
+  },
   palette: {
     primary: {
       main: '#21c3ef',
