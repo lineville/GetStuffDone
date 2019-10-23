@@ -32,12 +32,12 @@ class TaskList extends Component {
       snackBarVariant: '',
       snackBarMessage: '',
       isLoading: false,
-      darkMode: true,
+      darkMode: false,
     }
   }
 
   async componentDidMount() {
-    this.setState({ isLoading: true, darkMode: true })
+    this.setState({ isLoading: true, darkMode: false })
     const user = await firebase.auth().currentUser
     await db
       .collection('users')
