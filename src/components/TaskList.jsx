@@ -176,9 +176,9 @@ class TaskList extends Component {
 
   handleDarkModeToggle = event => {
     document.body.style.backgroundColor = event.target.checked
-      ? 'black'
+      ? '#464542'
       : 'white'
-    document.body.style.color = event.target.checked ? 'white' : 'black'
+    document.body.style.color = event.target.checked ? 'white' : '#464542'
     this.setState({
       darkMode: event.target.checked,
     })
