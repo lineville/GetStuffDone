@@ -7,6 +7,10 @@
       content="width=device-width, initial-scale=1, shrink-to-fit=no"
     />
     <meta name="theme-color" content="#000000" />
+    <meta
+      name="Description"
+      content="React-FireStore-Todos Created by Liam Neville"
+    />
 
     <title>React-FireStore-Todos</title>
 
@@ -71,6 +75,15 @@
       } else {
         console.log('Service Worker is not supported by browser.')
       }
+
+      let deferredPrompt
+      window.addEventListener('beforeinstallprompt', e => {
+        // Stash the event so it can be triggered later.
+        deferredPrompt = e
+        // Update UI notify the user they can add to home screen
+        // showInstallPromotion()
+        console.log(e)
+      })
     </script>
     <noscript>Your browser does not support JavaScript!</noscript>
   </body>
