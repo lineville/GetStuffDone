@@ -3,15 +3,11 @@ import './CSS/App.css'
 import Header from './components/Header'
 import Routes from './Routes'
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles'
-import AddToHomescreen from 'react-add-to-homescreen'
 
 const theme = createMuiTheme({
   overrides: {
     MuiInput: {
       input: {
-        // placeholder: {
-        //   color: 'purple',
-        // },
         color: 'black',
       },
     },
@@ -41,22 +37,12 @@ class App extends Component {
       }, 2000)
     }
   }
-
-  handleAddToHomescreenClick = () => {
-    alert(`
-      1. Open Share menu
-      2. Tap on "Add to Home Screen" button`)
-  }
-
   render() {
     return (
       <div className="App">
         <MuiThemeProvider theme={theme}>
           <Header />
           <Routes />
-          <AddToHomescreen
-            onAddToHomescreenClick={this.handleAddToHomescreenClick}
-          />
         </MuiThemeProvider>
       </div>
     )
