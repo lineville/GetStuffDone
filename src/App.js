@@ -9,9 +9,9 @@ const theme = createMuiTheme({
   overrides: {
     MuiInput: {
       input: {
-        placeholder: {
-          color: 'purple',
-        },
+        // placeholder: {
+        //   color: 'purple',
+        // },
         color: 'black',
       },
     },
@@ -21,10 +21,7 @@ const theme = createMuiTheme({
       main: '#21c3ef',
     },
     secondary: {
-      main: '#222222',
-    },
-    bright: {
-      main: '#414654',
+      main: '#4BB543',
     },
   },
   typography: {

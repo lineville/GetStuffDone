@@ -223,37 +223,47 @@ class TaskList extends Component {
           <Tab label="Incomplete" />
           <Tab label="Starred" />
         </Tabs>
-        <DragDropContext onDragEnd={this.onDragEnd}>
-          <Droppable droppableId="droppable">
-            {(provided, snapshot) => (
-              <div ref={provided.innerRef}>
-                {this.filterTasks(this.state.tasks).map((item, index) => (
-                  <Draggable key={item.id} draggableId={item.id} index={index}>
-                    {(provided, snapshot) => (
-                      <div
-                        ref={provided.innerRef}
-                        {...provided.draggableProps}
-                        {...provided.dragHandleProps}
-                      >
-                        <Task
-                          key={item.id}
-                          item={item}
-                          DataTransferItemList
-                          className="list"
-                          handleDelete={() => this.handleDelete(item)}
-                          toggleChecked={() => this.toggleChecked(item)}
-                          toggleStarred={() => this.toggleStarred(item)}
-                          user={this.state.user}
-                        />
-                      </div>
-                    )}
-                  </Draggable>
-                ))}
-                {provided.placeholder}
-              </div>
-            )}
-          </Droppable>
-        </DragDropContext>
+        <div
+          style={{
+            background: 'linear-gradient(to right, #12c2e9, #c471ed, #f64f59)',
+          }}
+        >
+          <DragDropContext onDragEnd={this.onDragEnd}>
+            <Droppable droppableId="droppable">
+              {(provided, snapshot) => (
+                <div ref={provided.innerRef}>
+                  {this.filterTasks(this.state.tasks).map((item, index) => (
+                    <Draggable
+                      key={item.id}
+                      draggableId={item.id}
+                      index={index}
+                    >
+                      {(provided, snapshot) => (
+                        <div
+                          ref={provided.innerRef}
+                          {...provided.draggableProps}
+                          {...provided.dragHandleProps}
+                        >
+                          <Task
+                            key={item.id}
+                            item={item}
+                            DataTransferItemList
+                            className="list"
+                            handleDelete={() => this.handleDelete(item)}
+                            toggleChecked={() => this.toggleChecked(item)}
+                            toggleStarred={() => this.toggleStarred(item)}
+                            user={this.state.user}
+                          />
+                        </div>
+                      )}
+                    </Draggable>
+                  ))}
+                  {provided.placeholder}
+                </div>
+              )}
+            </Droppable>
+          </DragDropContext>
+        </div>
         <Snackbar
           anchorOrigin={{
             vertical: 'bottom',

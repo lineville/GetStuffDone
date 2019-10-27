@@ -24,13 +24,13 @@ class Header extends Component {
     const isLoggedIn = this.props._user
     const { classes } = this.props
     return isLoggedIn ? (
-      <AppBar position="static" color="secondary">
+      <AppBar position="static" color="primary">
         <Toolbar>
-          <Typography variant="title" color="primary" className={classes.flex}>
-            To Do's
+          <Typography variant="title" color="inherit" className={classes.flex}>
+            Tasks
           </Typography>
           <Button onClick={this.handleLogout}>
-            <LogoutIcon className={classes.extendedIcon} color="primary" />
+            <LogoutIcon className={classes.extendedIcon} color="inherit" />
           </Button>
           <GithubCorner
             direction="left"
@@ -42,10 +42,10 @@ class Header extends Component {
         </Toolbar>
       </AppBar>
     ) : (
-      <AppBar position="static" color="secondary">
+      <AppBar position="static" color="primary">
         <Toolbar>
-          <Typography variant="title" color="primary" className={classes.flex}>
-            To Do's
+          <Typography variant="title" color="inherit" className={classes.flex}>
+            Tasks
           </Typography>
 
           <GithubCorner

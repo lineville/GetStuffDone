@@ -132,7 +132,7 @@ class Task extends Component {
         <ListItem dense button className="list-item">
           {this.state.item.completed ? (
             <CheckCircleOutlineOutlinedIcon
-              color="primary"
+              color="secondary"
               onClick={() => this.props.toggleChecked(this.state.item)}
             />
           ) : (
@@ -144,7 +144,7 @@ class Task extends Component {
 
           {this.state.item.starred ? (
             <StarIcon
-              color="primary"
+              color="secondary"
               onClick={() => this.props.toggleStarred(this.state.item)}
             />
           ) : (
