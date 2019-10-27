@@ -24,6 +24,8 @@ function Notification(props) {
   const { classes, className, message, onClose, variant, ...other } = props
   const Icon = variantIcon[variant]
 
+  const onConfirm = event => {}
+
   return (
     <SnackbarContent
       className={classNames(classes[variant], className)}
@@ -43,6 +45,15 @@ function Notification(props) {
           onClick={onClose}
         >
           <CloseIcon className={classes.icon} />
+        </IconButton>,
+        <IconButton
+          key="confirm"
+          aria-label="Confirm"
+          color="inherit"
+          className={classes.close}
+          onClick={onConfirm}
+        >
+          <CheckCircleIcon className={classes.icon} />
         </IconButton>,
       ]}
       {...other}
