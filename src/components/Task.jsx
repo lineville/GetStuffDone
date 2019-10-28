@@ -128,7 +128,6 @@ class Task extends Component {
   render() {
     return Object.keys(this.state.item).length ? (
       <div>
-        {/* role={undefined} */}
         <ListItem dense button className="list-item">
           {this.state.item.completed ? (
             <CheckCircleOutlineOutlinedIcon
@@ -136,23 +135,23 @@ class Task extends Component {
               onClick={() => this.props.toggleChecked(this.state.item)}
             />
           ) : (
-            <RadioButtonUncheckedOutlinedIcon
-              color="primary"
-              onClick={() => this.props.toggleChecked(this.state.item)}
-            />
-          )}
+              <RadioButtonUncheckedOutlinedIcon
+                style={{ color: "#8f8f8f" }}
+                onClick={() => this.props.toggleChecked(this.state.item)}
+              />
+            )}
 
           {this.state.item.starred ? (
             <StarIcon
-              color="primary"
+              style={{ color: "#f9d71c" }}
               onClick={() => this.props.toggleStarred(this.state.item)}
             />
           ) : (
-            <StarBorderIcon
-              color="primary"
-              onClick={() => this.props.toggleStarred(this.state.item)}
-            />
-          )}
+              <StarBorderIcon
+                style={{ color: "#8f8f8f" }}
+                onClick={() => this.props.toggleStarred(this.state.item)}
+              />
+            )}
 
           <ListItemText disableTypography>
             <Typography>{this.state.item.task}</Typography>
@@ -217,8 +216,8 @@ class Task extends Component {
         </Snackbar>
       </div>
     ) : (
-      <Spinner name="ball-clip-rotate-multiple" color="primary" />
-    )
+        <Spinner name="ball-clip-rotate-multiple" color="primary" />
+      )
   }
 }
 

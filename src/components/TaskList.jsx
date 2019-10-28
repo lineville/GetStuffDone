@@ -286,7 +286,7 @@ class TaskList extends Component {
       <div>
         <CreateTask />
         <Paper elevation={1} className={classes.root}>
-          <Typography variant="title" color="secondary">
+          <Typography variant="title" color="inherit">
             You have nothing to complete right now, add some tasks and get
             working!
           </Typography>
