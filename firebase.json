@@ -17,7 +17,7 @@
     ],
     "headers": [
       {
-        "source": "/service-worker.js",
+        "source": "/worker.js",
         "headers": [{ "key": "Cache-Control", "value": "no-cache" }]
       }
     ]
