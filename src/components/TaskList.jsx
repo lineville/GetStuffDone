@@ -50,6 +50,7 @@ class TaskList extends Component {
         db.collection('users')
           .doc(user.uid)
           .collection('tasks')
+          .orderBy('completed')
           .onSnapshot(snapshot => {
             this.setState({
               tasks: snapshot.docs.map(task => {
