@@ -217,11 +217,12 @@ class TaskList extends Component {
           indicatorColor="primary"
           textColor="inherit"
           centered
+
         >
-          <Tab label="All" />
-          <Tab label="Completed" />
-          <Tab label="Incomplete" />
-          <Tab label="Starred" />
+          <Tab label="All" disableRipple />
+          <Tab label="Completed" disableRipple />
+          <Tab label="Incomplete" disableRipple />
+          <Tab label="Starred" disableRipple />
         </Tabs>
         <div
           style={{
@@ -282,21 +283,21 @@ class TaskList extends Component {
         </Snackbar>
       </div>
     ) : (
-      <div>
-        <CreateTask />
-        <Paper elevation={1} className={classes.root}>
-          <Typography variant="title" color="inherit">
-            You have nothing to complete right now, add some tasks and get
-            working!
+        <div>
+          <CreateTask />
+          <Paper elevation={1} className={classes.root}>
+            <Typography variant="title" color="inherit">
+              You have nothing to complete right now, add some tasks and get
+              working!
           </Typography>
-        </Paper>
-        <Spinner
-          name="ball-clip-rotate-multiple"
-          color="primary"
-          className="center"
-        />
-      </div>
-    )
+          </Paper>
+          <Spinner
+            name="ball-clip-rotate-multiple"
+            color="primary"
+            className="center"
+          />
+        </div>
+      )
   }
 }
 
