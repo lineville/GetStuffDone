@@ -137,7 +137,7 @@ class Task extends Component {
             />
           ) : (
             <RadioButtonUncheckedOutlinedIcon
-              color="inherit"
+              color="primary"
               onClick={() => this.props.toggleChecked(this.state.item)}
             />
           )}
@@ -149,13 +149,13 @@ class Task extends Component {
             />
           ) : (
             <StarBorderIcon
-              color="inherit"
+              color="primary"
               onClick={() => this.props.toggleStarred(this.state.item)}
             />
           )}
 
           <ListItemText disableTypography>
-            <Typography color="inherit">{this.state.item.task}</Typography>
+            <Typography>{this.state.item.task}</Typography>
           </ListItemText>
           <SwapIcon />
           <IconButton aria-label="Edit" color="inherit" onClick={this.openForm}>
