@@ -62,7 +62,6 @@ class Task extends Component {
 
   async componentDidMount() {
     await this.setState({
-      // item: this.props.item,
       user: this.props.user,
     })
     await db
@@ -176,7 +175,6 @@ class Task extends Component {
                     margin="dense"
                     id="task"
                     name="newTask"
-                    // label="Task"
                     placeholder={this.state.item.task}
                     type="task"
                     fullWidth

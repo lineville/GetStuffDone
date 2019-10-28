@@ -145,7 +145,6 @@ class TaskList extends Component {
   }
 
   onDragEnd = result => {
-    // dropped outside the list
     if (!result.destination) {
       return
     }
@@ -228,7 +227,6 @@ class TaskList extends Component {
           style={{
             background:
               'linear-gradient(90deg, rgba(255,254,254,1) 76%, rgba(33,195,239,1) 100%)',
-            //background: linear-gradient(90deg, #efd5ff 0%, #515ada 100%);
           }}
         >
           <DragDropContext onDragEnd={this.onDragEnd}>
