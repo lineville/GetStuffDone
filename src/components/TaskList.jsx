@@ -225,7 +225,9 @@ class TaskList extends Component {
         </Tabs>
         <div
           style={{
-            background: 'linear-gradient(to right, #12c2e9, #c471ed, #f64f59)',
+            background:
+              'linear-gradient(90deg, rgba(255,254,254,1) 76%, rgba(33,195,239,1) 100%)',
+            //background: linear-gradient(90deg, #efd5ff 0%, #515ada 100%);
           }}
         >
           <DragDropContext onDragEnd={this.onDragEnd}>
