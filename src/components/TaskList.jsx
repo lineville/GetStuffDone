@@ -225,10 +225,10 @@ class TaskList extends Component {
           <Tab label="Starred" disableRipple />
         </Tabs>
         <div
-          style={{
-            background:
-              'linear-gradient(90deg, rgba(255,254,254,1) 76%, rgba(33,195,239,1) 100%)',
-          }}
+          // style={{
+          //   background:
+          //     'linear-gradient(90deg, rgba(255,254,254,1) 76%, rgba(33,195,239,1) 100%)',
+          // }}
         >
           <DragDropContext onDragEnd={this.onDragEnd}>
             <Droppable droppableId="droppable">
@@ -255,6 +255,7 @@ class TaskList extends Component {
                             toggleChecked={() => this.toggleChecked(item)}
                             toggleStarred={() => this.toggleStarred(item)}
                             user={this.state.user}
+                            darkMode={this.state.darkMode}
                           />
                         </div>
                       )}
