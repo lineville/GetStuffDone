@@ -64,6 +64,7 @@ class Signup extends Component {
         .doc(user.user.uid)
         .set({
           email: this.state.email,
+          darkMode: false
         })
       this.props.history.push('/tasklist')
     } catch (error) {
