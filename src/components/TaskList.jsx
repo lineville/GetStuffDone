@@ -241,9 +241,9 @@ class TaskList extends Component {
           textColor="inherit"
           centered
         >
-          <Tab label="All" disableRipple />
-          <Tab label="Completed" disableRipple />
+          {/* <Tab label="All" disableRipple /> */}
           <Tab label="Incomplete" disableRipple />
+          <Tab label="Completed" disableRipple />
           <Tab label="Starred" disableRipple />
         </Tabs>
         <div>
