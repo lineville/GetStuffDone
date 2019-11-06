@@ -177,11 +177,11 @@ class TaskList extends Component {
 
   filterTasks = tasks => {
     switch (this.state.filter) {
+      case 0:
+        return tasks.filter(task => !task.completed);
       case 1:
         return tasks.filter(task => task.completed);
       case 2:
-        return tasks.filter(task => !task.completed);
-      case 3:
         return tasks.filter(task => task.starred);
 
       default:
