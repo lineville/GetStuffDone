@@ -44,6 +44,7 @@ class CreateTask extends Component {
           task: this.state.newTask,
           completed: false,
           starred: false,
+          work: false
         })
       this.setState({
         newTask: '',

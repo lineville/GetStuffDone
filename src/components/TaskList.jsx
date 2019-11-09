@@ -64,15 +64,15 @@ class TaskList extends Component {
           .onSnapshot(doc => {
             this.setState({
               user: { id: doc.id, ...doc.data() }
-            })
+            });
             document.body.style.backgroundColor = this.state.user.darkMode
               ? "#464542"
               : "white";
             document.body.style.color = this.state.user.darkMode
               ? "white"
               : "#464542";
-          })
-      })
+          });
+      });
 
     this.setState({ isLoading: false });
   }
@@ -136,6 +136,24 @@ class TaskList extends Component {
     }
   };
 
+  toggleWork = item => {
+    try {
+      db.collection("users")
+        .doc(this.state.user.id)
+        .collection("tasks")
+        .doc(item.id)
+        .update({
+          work: !item.work
+        });
+    } catch (error) {
+      this.setState({
+        snackBarOpen: true,
+        snackBarVariant: "warning",
+        snackBarMessage: `Oops... ${error.message}`
+      });
+    }
+  };
+
   handleClose = (event, reason) => {
     if (reason === "clickaway") {
       return;
@@ -183,7 +201,8 @@ class TaskList extends Component {
         return tasks.filter(task => task.completed);
       case 2:
         return tasks.filter(task => task.starred);
-
+      case 3:
+        return tasks.filter(task => task.work);
       default:
         return tasks;
     }
@@ -245,6 +264,7 @@ class TaskList extends Component {
           <Tab label="Incomplete" disableRipple />
           <Tab label="Completed" disableRipple />
           <Tab label="Starred" disableRipple />
+          <Tab label="Work" disableRipple />
         </Tabs>
         <div>
           <DragDropContext onDragEnd={this.onDragEnd}>
@@ -271,6 +291,7 @@ class TaskList extends Component {
                             handleDelete={() => this.handleDelete(item)}
                             toggleChecked={() => this.toggleChecked(item)}
                             toggleStarred={() => this.toggleStarred(item)}
+                            toggleWork={() => this.toggleWork(item)}
                             user={this.state.user}
                             darkMode={this.state.darkMode}
                           />

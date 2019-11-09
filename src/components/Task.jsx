@@ -28,6 +28,7 @@ import StarIcon from "@material-ui/icons/Star";
 import StarBorderIcon from "@material-ui/icons/StarBorder";
 import RadioButtonUncheckedOutlinedIcon from "@material-ui/icons/RadioButtonUncheckedOutlined";
 import CheckCircleOutlineOutlinedIcon from "@material-ui/icons/CheckCircleOutlineOutlined";
+import WorkOutlineIcon from "@material-ui/icons/WorkOutline";
 
 const styles = {
   "input-label": {
@@ -149,6 +150,18 @@ class Task extends Component {
             <StarBorderIcon
               style={{ color: "#8f8f8f" }}
               onClick={() => this.props.toggleStarred(this.state.item)}
+            />
+          )}
+
+          {this.state.item.work ? (
+            <WorkOutlineIcon
+              color="primary"
+              onClick={() => this.props.toggleWork(this.state.item)}
+            />
+          ) : (
+            <WorkOutlineIcon
+              style={{ color: "#8f8f8f" }}
+              onClick={() => this.props.toggleWork(this.state.item)}
             />
           )}
 
