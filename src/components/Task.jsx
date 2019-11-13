@@ -15,7 +15,7 @@ import {
 } from "@material-ui/core";
 import {
   Delete as DeleteIcon,
-  Edit as EditIcon,
+  Edit as EditIcon
   // SwapVert as SwapIcon
 } from "@material-ui/icons";
 import MaterialUIForm from "material-ui-form";
@@ -155,7 +155,8 @@ class Task extends Component {
 
           {this.state.item.work ? (
             <WorkOutlineIcon
-              color="primary"
+              // color="primary"
+              style={{ color: "#32CD32" }}
               onClick={() => this.props.toggleWork(this.state.item)}
             />
           ) : (
