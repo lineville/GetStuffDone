@@ -1,67 +1,69 @@
-import React, { Component } from 'react'
-import firebase from 'firebase'
-import { withAuth } from 'fireview'
-import { withRouter } from 'react-router-dom'
-import PropTypes from 'prop-types'
-import { withStyles } from '@material-ui/core/styles'
+import React, { Component } from "react";
+import firebase from "firebase";
+import { withAuth } from "fireview";
+import { withRouter } from "react-router-dom";
+import PropTypes from "prop-types";
+import { withStyles } from "@material-ui/core/styles";
 import {
   FormControl,
   Button,
   TextField,
   Snackbar,
   Typography,
-  Divider,
-} from '@material-ui/core'
-import Notification from './Notification'
-import styles from '../CSS/login'
+  Divider
+} from "@material-ui/core";
+import Notification from "./Notification";
+import styles from "../CSS/login";
 
 class Login extends Component {
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
-      email: '',
-      password: '',
+      email: "",
+      password: "",
       snackBarOpen: false,
-      snackBarVariant: '',
-      snackBarMessage: '',
-    }
+      snackBarVariant: "",
+      snackBarMessage: ""
+    };
   }
 
   handleChange = event => {
-    event.preventDefault()
+    event.preventDefault();
     this.setState({
-      [event.target.name]: event.target.value,
-    })
-  }
+      [event.target.name]: event.target.value
+    });
+  };
 
   handleLogin = async event => {
-    event.preventDefault()
+    event.preventDefault();
     try {
-      await firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL)
       await firebase
         .auth()
-        .signInWithEmailAndPassword(this.state.email, this.state.password)
-      this.props.history.push('/tasklist')
+        .setPersistence(firebase.auth.Auth.Persistence.LOCAL);
+      await firebase
+        .auth()
+        .signInWithEmailAndPassword(this.state.email, this.state.password);
+      this.props.history.push("/tasklist");
     } catch (error) {
       this.setState({
         snackBarOpen: true,
-        snackBarVariant: 'warning',
-        snackBarMessage: `Oops... ${error.message}`,
-      })
+        snackBarVariant: "warning",
+        snackBarMessage: `Oops... ${error.message}`
+      });
     }
-  }
+  };
 
   handleClose = (event, reason) => {
-    if (reason === 'clickaway') {
-      return
+    if (reason === "clickaway") {
+      return;
     }
     this.setState({
-      snackBarOpen: false,
-    })
-  }
+      snackBarOpen: false
+    });
+  };
 
   render() {
-    const { classes } = this.props
+    const { classes } = this.props;
     return (
       <div>
         <form onSubmit={this.handleLogin} className={classes.container}>
@@ -105,8 +107,8 @@ class Login extends Component {
 
         <Snackbar
           anchorOrigin={{
-            vertical: 'bottom',
-            horizontal: 'left',
+            vertical: "bottom",
+            horizontal: "left"
           }}
           open={this.state.snackBarOpen}
           autoHideDuration={4000}
@@ -119,12 +121,12 @@ class Login extends Component {
           />
         </Snackbar>
       </div>
-    )
+    );
   }
 }
 
 Login.propTypes = {
-  classes: PropTypes.object.isRequired,
-}
+  classes: PropTypes.object.isRequired
+};
 
-export default withStyles(styles)(withRouter(withAuth(Login)))
+export default withStyles(styles)(withRouter(withAuth(Login)));

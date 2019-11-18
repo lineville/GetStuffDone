@@ -1,52 +1,52 @@
-import firebase from 'firebase'
-import React, { Component } from 'react'
-import db from '../firestore'
-import PropTypes from 'prop-types'
-import { withRouter } from 'react-router-dom'
-import { withAuth } from 'fireview'
-import { withStyles } from '@material-ui/core/styles'
+import firebase from "firebase";
+import React, { Component } from "react";
+import db from "../firestore";
+import PropTypes from "prop-types";
+import { withRouter } from "react-router-dom";
+import { withAuth } from "fireview";
+import { withStyles } from "@material-ui/core/styles";
 import {
   TextField,
   FormControl,
   Button,
   Divider,
   Typography,
-  Snackbar,
-} from '@material-ui/core/'
-import MaterialUIForm from 'material-ui-form'
-import Notification from './Notification'
-import styles from '../CSS/login'
+  Snackbar
+} from "@material-ui/core/";
+import MaterialUIForm from "material-ui-form";
+import Notification from "./Notification";
+import styles from "../CSS/login";
 
 class Signup extends Component {
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
-      email: '',
-      password: '',
+      email: "",
+      password: "",
       snackBarOpen: false,
-      snackBarMessage: '',
-      snackBarVariant: '',
-    }
+      snackBarMessage: "",
+      snackBarVariant: ""
+    };
   }
 
   handleChange = event => {
-    event.preventDefault()
+    event.preventDefault();
     this.setState({
-      [event.target.name]: event.target.value,
-    })
-  }
+      [event.target.name]: event.target.value
+    });
+  };
 
   handleClose = (event, reason) => {
-    if (reason === 'clickaway') {
-      return
+    if (reason === "clickaway") {
+      return;
     }
     this.setState({
-      snackBarOpen: false,
-    })
-  }
+      snackBarOpen: false
+    });
+  };
 
   handleSignup = async event => {
-    event.preventDefault()
+    event.preventDefault();
     try {
       const user = await firebase
         .auth()
@@ -58,26 +58,26 @@ class Signup extends Component {
               this.state.email,
               this.state.password
             )
-        )
+        );
       await db
-        .collection('users')
+        .collection("users")
         .doc(user.user.uid)
         .set({
           email: this.state.email,
           darkMode: false
-        })
-      this.props.history.push('/tasklist')
+        });
+      this.props.history.push("/tasklist");
     } catch (error) {
       this.setState({
         snackBarOpen: true,
-        snackBarVariant: 'warning',
-        snackBarMessage: `Oops... ${error.message}`,
-      })
+        snackBarVariant: "warning",
+        snackBarMessage: `Oops... ${error.message}`
+      });
     }
-  }
+  };
 
   render() {
-    const { classes } = this.props
+    const { classes } = this.props;
     return (
       <div>
         <MaterialUIForm
@@ -123,8 +123,8 @@ class Signup extends Component {
         </MaterialUIForm>
         <Snackbar
           anchorOrigin={{
-            vertical: 'bottom',
-            horizontal: 'left',
+            vertical: "bottom",
+            horizontal: "left"
           }}
           open={this.state.snackBarOpen}
           autoHideDuration={4000}
@@ -137,11 +137,11 @@ class Signup extends Component {
           />
         </Snackbar>
       </div>
-    )
+    );
   }
 }
 Signup.propTypes = {
-  classes: PropTypes.object.isRequired,
-}
+  classes: PropTypes.object.isRequired
+};
 
-export default withStyles(styles)(withRouter(withAuth(Signup)))
+export default withStyles(styles)(withRouter(withAuth(Signup)));

@@ -1,65 +1,65 @@
-import React, { Component } from 'react'
-import firebase from 'firebase'
-import db from '../firestore'
-import { FormControl, TextField, Snackbar, Fab } from '@material-ui/core'
-import MaterialUIForm from 'material-ui-form'
-import Notification from './Notification'
-import { Add as AddIcon } from '@material-ui/icons'
-import '../CSS/App.css'
+import React, { Component } from "react";
+import firebase from "firebase";
+import db from "../firestore";
+import { FormControl, TextField, Snackbar, Fab } from "@material-ui/core";
+import MaterialUIForm from "material-ui-form";
+import Notification from "./Notification";
+import { Add as AddIcon } from "@material-ui/icons";
+import "../CSS/App.css";
 
 class CreateTask extends Component {
   constructor() {
-    super()
+    super();
     this.state = {
-      newTask: '',
+      newTask: "",
       snackBarOpen: false,
-      snackBarMessage: '',
-      snackBarVariant: '',
-    }
+      snackBarMessage: "",
+      snackBarVariant: ""
+    };
   }
 
   handleChange = event => {
     this.setState({
-      [event.target.name]: event.target.value,
-    })
-  }
+      [event.target.name]: event.target.value
+    });
+  };
 
   handleClose = (event, reason) => {
-    if (reason === 'clickaway') {
-      return
+    if (reason === "clickaway") {
+      return;
     }
     this.setState({
-      snackBarOpen: false,
-    })
-  }
+      snackBarOpen: false
+    });
+  };
 
   createTask = async event => {
-    const user = await firebase.auth().currentUser
+    const user = await firebase.auth().currentUser;
     try {
       await db
-        .collection('users')
+        .collection("users")
         .doc(user.uid)
-        .collection('tasks')
+        .collection("tasks")
         .add({
           task: this.state.newTask,
           completed: false,
           starred: false,
           work: false
-        })
+        });
       this.setState({
-        newTask: '',
+        newTask: "",
         snackBarOpen: true,
-        snackBarVariant: 'success',
-        snackBarMessage: `Task added!`,
-      })
+        snackBarVariant: "success",
+        snackBarMessage: `Task added!`
+      });
     } catch (error) {
       this.setState({
         snackBarOpen: true,
-        snackBarVariant: 'warning',
-        snackBarMessage: `Oops... ${error.message}`,
-      })
+        snackBarVariant: "warning",
+        snackBarMessage: `Oops... ${error.message}`
+      });
     }
-  }
+  };
 
   render() {
     return (
@@ -92,8 +92,8 @@ class CreateTask extends Component {
         </MaterialUIForm>
         <Snackbar
           anchorOrigin={{
-            vertical: 'bottom',
-            horizontal: 'left',
+            vertical: "bottom",
+            horizontal: "left"
           }}
           open={this.state.snackBarOpen}
           autoHideDuration={4000}
@@ -106,8 +106,8 @@ class CreateTask extends Component {
           />
         </Snackbar>
       </div>
-    )
+    );
   }
 }
 
-export default CreateTask
+export default CreateTask;

@@ -16,7 +16,6 @@ import {
 import {
   Delete as DeleteIcon,
   Edit as EditIcon
-  // SwapVert as SwapIcon
 } from "@material-ui/icons";
 import MaterialUIForm from "material-ui-form";
 import Spinner from "react-spinkit";
@@ -169,7 +168,6 @@ class Task extends Component {
           <ListItemText disableTypography>
             <Typography color="inherit">{this.state.item.task}</Typography>
           </ListItemText>
-          {/* <SwapIcon /> */}
           <IconButton aria-label="Edit" color="inherit" onClick={this.openForm}>
             <EditIcon />
           </IconButton>
