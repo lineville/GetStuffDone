@@ -82,7 +82,7 @@ class CreateTask extends Component {
           </FormControl>
 
           <Fab
-            variant="extended"
+            // variant="extended"
             color="primary"
             aria-label="Add"
             id="addbutton"

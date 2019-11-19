@@ -209,7 +209,6 @@ class TaskList extends Component {
   };
 
   handleDarkModeToggle = event => {
-    console.log(event.target.value);
     try {
       db.collection("users")
         .doc(this.state.user.id)
@@ -226,7 +225,6 @@ class TaskList extends Component {
   };
 
   render() {
-    console.log(this.state.user);
     const { classes } = this.props;
     if (this.state.isLoading) {
       return (
