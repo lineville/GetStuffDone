@@ -239,7 +239,7 @@ class TaskList extends Component {
     }
     return this.state.tasks.length ? (
       <div>
-        <CreateTask />
+        <CreateTask filter={this.state.filter}/>
 
         <FormControlLabel
           control={

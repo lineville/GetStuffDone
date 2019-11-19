@@ -2,6 +2,12 @@
   "name": "getstuffdone",
   "version": "0.1.0",
   "main": "src/electron-starter.js",
+  "description": "Simple todo list app with all the bells and whistles",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lineville/GetStuffDone"
+  },
+  "license": "ISC",
   "dependencies": {
     "@material-ui/core": "^3.0.0",
     "@material-ui/icons": "^3.0.0",

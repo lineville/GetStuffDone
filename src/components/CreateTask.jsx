@@ -8,8 +8,8 @@ import { Add as AddIcon } from "@material-ui/icons";
 import "../CSS/App.css";
 
 class CreateTask extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       newTask: "",
       snackBarOpen: false,
@@ -35,6 +35,8 @@ class CreateTask extends Component {
 
   createTask = async event => {
     const user = await firebase.auth().currentUser;
+    const starred = this.props.filter === 2;
+    const work = this.props.filter === 3;
     try {
       await db
         .collection("users")
@@ -43,8 +45,8 @@ class CreateTask extends Component {
         .add({
           task: this.state.newTask,
           completed: false,
-          starred: false,
-          work: false
+          starred: starred,
+          work: work
         });
       this.setState({
         newTask: "",
