@@ -196,12 +196,14 @@ class TaskList extends Component {
   filterTasks = tasks => {
     switch (this.state.filter) {
       case 0:
-        return tasks.filter(task => !task.completed);
+        return tasks;
       case 1:
-        return tasks.filter(task => task.completed);
+        return tasks.filter(task => !task.completed);
       case 2:
-        return tasks.filter(task => task.starred);
+        return tasks.filter(task => task.completed);
       case 3:
+        return tasks.filter(task => task.starred);
+      case 4:
         return tasks.filter(task => task.work);
       default:
         return tasks;
@@ -258,7 +260,7 @@ class TaskList extends Component {
           textColor="inherit"
           centered
         >
-          {/* <Tab label="All" disableRipple /> */}
+          <Tab label="All" disableRipple />
           <Tab label="Incomplete" disableRipple />
           <Tab label="Completed" disableRipple />
           <Tab label="Starred" disableRipple />
