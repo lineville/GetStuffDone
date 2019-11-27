@@ -215,7 +215,7 @@ class Task extends Component {
             horizontal: "left"
           }}
           open={this.state.snackBarOpen}
-          autoHideDuration={4000}
+          autoHideDuration={2000}
           onClose={this.closePopup}
         >
           <Notification
