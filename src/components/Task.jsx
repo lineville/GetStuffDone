@@ -37,13 +37,6 @@ const styles = {
     width: "100%",
     color: "red"
   },
-
-  input: {
-    "&::placeholder": {
-      textOverflow: "ellipsis !important",
-      color: "yellow"
-    }
-  }
 };
 
 class Task extends Component {
