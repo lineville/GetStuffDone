@@ -200,11 +200,11 @@ class TaskList extends Component {
       case 1:
         return tasks.filter(task => !task.completed);
       case 2:
-        return tasks.filter(task => task.completed);
-      case 3:
         return tasks.filter(task => task.starred);
-      case 4:
+      case 3:
         return tasks.filter(task => task.work);
+      case 4:
+        return tasks.filter(task => task.starred && task.work && !task.completed);
       default:
         return tasks;
     }
@@ -262,9 +262,9 @@ class TaskList extends Component {
         >
           <Tab label="All" disableRipple />
           <Tab label="Incomplete" disableRipple />
-          <Tab label="Completed" disableRipple />
           <Tab label="Starred" disableRipple />
           <Tab label="Work" disableRipple />
+          <Tab label="Critical" disableRipple />
         </Tabs>
         <div>
           <DragDropContext onDragEnd={this.onDragEnd}>

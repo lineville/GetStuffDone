@@ -35,8 +35,8 @@ class CreateTask extends Component {
 
   createTask = async event => {
     const user = await firebase.auth().currentUser;
-    const starred = this.props.filter === 3;
-    const work = this.props.filter === 4;
+    const starred = this.props.filter === 2;
+    const work = this.props.filter === 3;
     try {
       await db
         .collection("users")

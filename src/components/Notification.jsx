@@ -11,7 +11,8 @@ import {
 import IconButton from "@material-ui/core/IconButton";
 import SnackbarContent from "@material-ui/core/SnackbarContent";
 import { withStyles } from "@material-ui/core/styles";
-import styles from "../CSS/notification";
+import { green, amber } from '@material-ui/core/colors/'
+// import styles from "../CSS/notification";
 
 const variantIcon = {
   success: CheckCircleIcon,
@@ -20,7 +21,7 @@ const variantIcon = {
   info: InfoIcon
 };
 
-function Notification(props) {
+const Notification = (props) => {
   const { classes, className, message, onClose, variant, ...other } = props;
   const Icon = variantIcon[variant];
 
@@ -57,5 +58,45 @@ Notification.propTypes = {
   onClose: PropTypes.func,
   variant: PropTypes.oneOf(["success", "warning", "error", "info"]).isRequired
 };
+
+
+const styles = theme => ({
+  success: {
+    backgroundColor: green[600],
+  },
+  error: {
+    backgroundColor: theme.palette.error.dark,
+  },
+  info: {
+    backgroundColor: theme.palette.primary.dark,
+  },
+  warning: {
+    backgroundColor: amber[700],
+  },
+  icon: {
+    fontSize: 20,
+  },
+  iconVariant: {
+    opacity: 0.9,
+    marginRight: theme.spacing.unit,
+  },
+  message: {
+    display: 'flex',
+    alignItems: 'center',
+  },
+  margin: {
+    margin: theme.spacing.unit,
+  },
+  button: {
+    margin: theme.spacing.unit,
+  },
+  leftIcon: {
+    marginRight: theme.spacing.unit,
+  },
+  rightIcon: {
+    marginLeft: theme.spacing.unit,
+  },
+})
+
 
 export default withStyles(styles)(Notification);
