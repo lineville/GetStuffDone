@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React, { Component } from "react";
 import db from "../firestore";
 import {
@@ -13,10 +14,7 @@ import {
   Snackbar,
   Typography
 } from "@material-ui/core";
-import {
-  Delete as DeleteIcon,
-  Edit as EditIcon
-} from "@material-ui/icons";
+import { Delete as DeleteIcon, Edit as EditIcon } from "@material-ui/icons";
 import MaterialUIForm from "material-ui-form";
 import Spinner from "react-spinkit";
 import Notification from "./Notification";
@@ -28,6 +26,7 @@ import StarBorderIcon from "@material-ui/icons/StarBorder";
 import RadioButtonUncheckedOutlinedIcon from "@material-ui/icons/RadioButtonUncheckedOutlined";
 import CheckCircleOutlineOutlinedIcon from "@material-ui/icons/CheckCircleOutlineOutlined";
 import WorkOutlineIcon from "@material-ui/icons/WorkOutline";
+import Priority from "./Priority";
 
 const styles = {
   "input-label": {
@@ -36,7 +35,7 @@ const styles = {
     overflow: "hidden",
     width: "100%",
     color: "red"
-  },
+  }
 };
 
 class Task extends Component {
@@ -157,6 +156,12 @@ class Task extends Component {
               onClick={() => this.props.toggleWork(this.state.item)}
             />
           )}
+
+          <Priority
+            item={this.state.item}
+            decrementPriority={this.props.decrementPriority}
+            incrementPriority={this.props.incrementPriority}
+          />
 
           <ListItemText disableTypography>
             <Typography color="inherit">{this.state.item.task}</Typography>

@@ -49,7 +49,9 @@ class TaskList extends Component {
         db.collection("users")
           .doc(user.uid)
           .collection("tasks")
-          .orderBy("completed")
+          .orderBy("priority", "desc")
+          .orderBy("completed", "asc")
+          .orderBy("starred", "desc")
           .onSnapshot(snapshot => {
             this.setState({
               tasks: snapshot.docs.map(task => {
@@ -191,6 +193,7 @@ class TaskList extends Component {
     this.setState({
       tasks
     });
+    // * Save this ordering somehow to user profile and then recreate the state from that order
   };
 
   filterTasks = tasks => {
@@ -225,6 +228,42 @@ class TaskList extends Component {
       });
     }
   };
+
+  incrementPriority = item => {
+    try {
+      db.collection("users")
+        .doc(this.state.user.id)
+        .collection("tasks")
+        .doc(item.id)
+        .update({
+          priority: (isNaN(item.priority) ? 0 : item.priority) + 1
+        });
+    } catch (error) {
+      this.setState({
+        snackBarOpen: true,
+        snackBarVariant: "warning",
+        snackBarMessage: `Oops... ${error.message}`
+      });
+    }
+  }
+
+  decrementPriority = item => {
+    try {
+      db.collection("users")
+        .doc(this.state.user.id)
+        .collection("tasks")
+        .doc(item.id)
+        .update({
+          priority: (isNaN(item.priority) ? 0 : item.priority) - 1
+        });
+    } catch (error) {
+      this.setState({
+        snackBarOpen: true,
+        snackBarVariant: "warning",
+        snackBarMessage: `Oops... ${error.message}`
+      });
+    }
+  }
 
   render() {
     const { classes } = this.props;
@@ -294,6 +333,8 @@ class TaskList extends Component {
                             toggleWork={() => this.toggleWork(item)}
                             user={this.state.user}
                             darkMode={this.state.darkMode}
+                            incrementPriority={() => this.incrementPriority(item)}
+                            decrementPriority={() => this.decrementPriority(item)}
                           />
                         </div>
                       )}
