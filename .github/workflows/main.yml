@@ -18,12 +18,10 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
     # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v1
     - name: CD
       uses: actions/setup-node@v1
       with:
         node-version: '12.x'
-    - run: npm run install --production
-    - run: npm run build --if-present
-    - run: npm run deploy
-
+    - run: npm run install
+    - run: npm run deploys
