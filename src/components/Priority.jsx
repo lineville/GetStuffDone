@@ -29,8 +29,7 @@ const Priority = props => {
         disabled={true}
         fullWidth={false}
         float="left"
-        s
-        style={{ width: 50, margin: 10, flex: 1 }}
+        style={{ width: 50, margin: 10, flex: 1, color: "primary" }}
         value={item.priority}
       />
       <ul style={{ listStyle: "none", float: "right", margin: 0, padding: 5, flex: 1 }}>
