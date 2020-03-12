@@ -1,4 +1,4 @@
-[![Actions Status](https://xxx.execute-api.us-west-2.amazonaws.com/production/badge/{owner}/{repo})](https://xxx.execute-api.us-west-2.amazonaws.com/production/results/{owner}/{repo}) 
+![badge](https://action-badges.now.sh/lineville/GetStuffDone)
 
 ## [Live Demo](https://getstuffdone-82116.firebaseapp.com/)
 
