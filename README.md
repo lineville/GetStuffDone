@@ -1,4 +1,4 @@
-![CD](https://github.com/lineville/GetStuffDone/workflows/CD/badge.svg)
+![CD](https://github.com/lineville/GetStuffDone/workflows/CD/badge.svg) [https://getstuffdone-82116.firebaseapp.com/](https://getstuffdone-82116.firebaseapp.com/)
 
 # Simple Todo List app built with React, Google Firebase and Electron.js.
 
@@ -10,4 +10,3 @@
 
 Features include marking Tasks as completed, starred or work and tasks can be filtered by starred, completed, incomplete or work. Full drag and drop capabilities are included as well as dark and light mode that is saved on the user profile.
 
-[https://getstuffdone-82116.firebaseapp.com/](https://getstuffdone-82116.firebaseapp.com/)
