@@ -1,4 +1,6 @@
-![CD](https://github.com/lineville/GetStuffDone/workflows/CD/badge.svg) [https://getstuffdone-82116.firebaseapp.com/](https://getstuffdone-82116.firebaseapp.com/)
+[![Actions Status](https://xxx.execute-api.us-west-2.amazonaws.com/production/badge/{owner}/{repo})](https://xxx.execute-api.us-west-2.amazonaws.com/production/results/{owner}/{repo}) 
+
+## [Live Demo](https://getstuffdone-82116.firebaseapp.com/)
 
 # Simple Todo List app built with React, Google Firebase and Electron.js.
 
