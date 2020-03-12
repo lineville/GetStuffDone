@@ -30,7 +30,7 @@
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "predeploy": "npm run build",
-    "deploy": "firebase deploy",
+    "deploy": "NODE_ENV=production firebase deploy",
     "package": "electron-forge package",
     "make": "electron-forge make",
     "publish": "electron-forge publish"
