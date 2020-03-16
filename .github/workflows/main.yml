@@ -31,8 +31,12 @@ jobs:
         uses: actions/download-artifact@master
         with:
           name: dist
-      - name: Set project dir environment var
-        run: echo ::set-env name=PROJECT_DIR::"$GITHUB_WORKSPACE/GetStuffDone"
+      - name: Setup Node
+        uses: actions/setup-node@master
+        with:
+        node-version: "10.x"
+      - run: npm install
+      - run: npm run build:prod
       - name: Deploy to Firebase
         uses: w9jds/firebase-action@master
         with:
