@@ -6,8 +6,7 @@ on:
 
 jobs:
   firebase-deploy:
-    name: Deploy
-    needs: build
+    name: Firebase Deploy
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repo
