@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
-import React, { Component } from "react";
-import db from "../firestore";
+import React, { Component } from 'react'
+import db from '../firestore'
 import {
   ListItem,
   ListItemText,
@@ -12,109 +12,109 @@ import {
   TextField,
   FormControl,
   Snackbar,
-  Typography
-} from "@material-ui/core";
-import { Delete as DeleteIcon, Edit as EditIcon } from "@material-ui/icons";
-import MaterialUIForm from "material-ui-form";
-import Spinner from "react-spinkit";
-import Notification from "./Notification";
-import "../CSS/App.css";
+  Typography,
+} from '@material-ui/core'
+import { Delete as DeleteIcon, Edit as EditIcon } from '@material-ui/icons'
+import MaterialUIForm from 'material-ui-form'
+import Spinner from 'react-spinkit'
+import Notification from './Notification'
+import '../CSS/App.css'
 
-import { withStyles } from "@material-ui/core/styles";
-import StarIcon from "@material-ui/icons/Star";
-import StarBorderIcon from "@material-ui/icons/StarBorder";
-import RadioButtonUncheckedOutlinedIcon from "@material-ui/icons/RadioButtonUncheckedOutlined";
-import CheckCircleOutlineOutlinedIcon from "@material-ui/icons/CheckCircleOutlineOutlined";
-import WorkOutlineIcon from "@material-ui/icons/WorkOutline";
-import Priority from "./Priority";
+import { withStyles } from '@material-ui/core/styles'
+import StarIcon from '@material-ui/icons/Star'
+import StarBorderIcon from '@material-ui/icons/StarBorder'
+import RadioButtonUncheckedOutlinedIcon from '@material-ui/icons/RadioButtonUncheckedOutlined'
+import CheckCircleOutlineOutlinedIcon from '@material-ui/icons/CheckCircleOutlineOutlined'
+import LocalGroceryStoreOutlinedIcon from '@material-ui/icons/LocalGroceryStoreOutlined'
+import Priority from './Priority'
 
 const styles = {
-  "input-label": {
-    textOverflow: "ellipsis",
-    whiteSpace: "nowrap",
-    overflow: "hidden",
-    width: "100%",
-    color: "red"
-  }
-};
+  'input-label': {
+    textOverflow: 'ellipsis',
+    whiteSpace: 'nowrap',
+    overflow: 'hidden',
+    width: '100%',
+    color: 'red',
+  },
+}
 
 class Task extends Component {
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
       item: {},
       open: false,
-      newTask: "",
+      newTask: '',
       user: {},
       snackBarOpen: false,
-      snackBarVariant: "",
-      snackBarMessage: ""
-    };
+      snackBarVariant: '',
+      snackBarMessage: '',
+    }
   }
 
   async componentDidMount() {
     await this.setState({
-      user: this.props.user
-    });
+      user: this.props.user,
+    })
     await db
-      .collection("users")
+      .collection('users')
       .doc(this.state.user.id)
-      .collection("tasks")
+      .collection('tasks')
       .doc(this.props.item.id)
-      .onSnapshot(snapshot => {
+      .onSnapshot((snapshot) => {
         this.setState({
-          item: { id: snapshot.id, ...snapshot.data() }
-        });
-      });
+          item: { id: snapshot.id, ...snapshot.data() },
+        })
+      })
   }
 
   handleClose = () => {
-    this.setState({ open: false });
-  };
+    this.setState({ open: false })
+  }
 
   closePopup = () => {
-    this.setState({ snackBarOpen: false });
-  };
+    this.setState({ snackBarOpen: false })
+  }
 
-  handleChange = event => {
+  handleChange = (event) => {
     this.setState({
-      [event.target.name]: event.target.value
-    });
-  };
+      [event.target.name]: event.target.value,
+    })
+  }
 
   openForm = () => {
     this.setState({
-      open: true
-    });
-  };
+      open: true,
+    })
+  }
 
   handleEdit = () => {
     try {
-      db.collection("users")
+      db.collection('users')
         .doc(this.state.user.id)
-        .collection("tasks")
+        .collection('tasks')
         .doc(this.state.item.id)
         .update({
-          task: this.state.newTask
+          task: this.state.newTask,
         })
         .then(() => {
-          this.handleClose();
+          this.handleClose()
         })
         .then(() => {
           this.setState({
             snackBarOpen: true,
-            snackBarVariant: "success",
-            snackBarMessage: `Task updated successfully!`
-          });
-        });
+            snackBarVariant: 'success',
+            snackBarMessage: `Task updated successfully!`,
+          })
+        })
     } catch (error) {
       this.setState({
         snackBarOpen: true,
-        snackBarVariant: "warning",
-        snackBarMessage: `Oops... ${error.message}`
-      });
+        snackBarVariant: 'warning',
+        snackBarMessage: `Oops... ${error.message}`,
+      })
     }
-  };
+  }
 
   render() {
     return Object.keys(this.state.item).length ? (
@@ -127,33 +127,33 @@ class Task extends Component {
             />
           ) : (
             <RadioButtonUncheckedOutlinedIcon
-              style={{ color: "#8f8f8f" }}
+              style={{ color: '#8f8f8f' }}
               onClick={() => this.props.toggleChecked(this.state.item)}
             />
           )}
 
           {this.state.item.starred ? (
             <StarIcon
-              style={{ color: "#f9d71c" }}
+              style={{ color: '#f9d71c' }}
               onClick={() => this.props.toggleStarred(this.state.item)}
             />
           ) : (
             <StarBorderIcon
-              style={{ color: "#8f8f8f" }}
+              style={{ color: '#8f8f8f' }}
               onClick={() => this.props.toggleStarred(this.state.item)}
             />
           )}
 
-          {this.state.item.work ? (
-            <WorkOutlineIcon
+          {this.state.item.groceries ? (
+            <LocalGroceryStoreOutlinedIcon
               // color="primary"
-              style={{ color: "#32CD32" }}
-              onClick={() => this.props.toggleWork(this.state.item)}
+              style={{ color: '#32CD32' }}
+              onClick={() => this.props.toggleGroceries(this.state.item)}
             />
           ) : (
-            <WorkOutlineIcon
-              style={{ color: "#8f8f8f" }}
-              onClick={() => this.props.toggleWork(this.state.item)}
+            <LocalGroceryStoreOutlinedIcon
+              style={{ color: '#8f8f8f' }}
+              onClick={() => this.props.toggleGroceries(this.state.item)}
             />
           )}
 
@@ -191,7 +191,7 @@ class Task extends Component {
                     onChange={this.handleChange}
                     defaultValue={this.state.item.task}
                     InputProps={{
-                      classes: { input: this.props.classes.input }
+                      classes: { input: this.props.classes.input },
                     }}
                   />
                 </FormControl>
@@ -209,8 +209,8 @@ class Task extends Component {
         </ListItem>
         <Snackbar
           anchorOrigin={{
-            vertical: "bottom",
-            horizontal: "left"
+            vertical: 'bottom',
+            horizontal: 'left',
           }}
           open={this.state.snackBarOpen}
           autoHideDuration={2000}
@@ -225,8 +225,8 @@ class Task extends Component {
       </div>
     ) : (
       <Spinner name="ball-clip-rotate-multiple" color="primary" />
-    );
+    )
   }
 }
 
-export default withStyles(styles)(Task);
+export default withStyles(styles)(Task)

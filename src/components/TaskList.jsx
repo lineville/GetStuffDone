@@ -1,9 +1,9 @@
-import React, { Component } from "react";
-import db from "../firestore";
-import firebase from "firebase";
-import { withAuth } from "fireview";
-import PropTypes from "prop-types";
-import { withStyles } from "@material-ui/core/styles";
+import React, { Component } from 'react'
+import db from '../firestore'
+import firebase from 'firebase'
+import { withAuth } from 'fireview'
+import PropTypes from 'prop-types'
+import { withStyles } from '@material-ui/core/styles'
 import {
   Snackbar,
   Typography,
@@ -11,262 +11,258 @@ import {
   Tabs,
   Tab,
   Switch,
-  FormControlLabel
-} from "@material-ui/core";
-import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
-import Spinner from "react-spinkit";
-import Task from "./Task";
-import Notification from "./Notification";
-import CreateTask from "./CreateTask";
-import "../CSS/App.css";
-import styles from "../CSS/tasklist";
+  FormControlLabel,
+} from '@material-ui/core'
+import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd'
+import Spinner from 'react-spinkit'
+import Task from './Task'
+import Notification from './Notification'
+import CreateTask from './CreateTask'
+import '../CSS/App.css'
+import styles from '../CSS/tasklist'
 
 class TaskList extends Component {
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
       tasks: [],
       user: {},
       filter: 0,
       snackBarOpen: false,
-      snackBarVariant: "",
-      snackBarMessage: "",
-      isLoading: false
-    };
+      snackBarVariant: '',
+      snackBarMessage: '',
+      isLoading: false,
+    }
   }
 
   async componentDidMount() {
-    this.setState({ isLoading: true });
-    const user = await firebase.auth().currentUser;
+    this.setState({ isLoading: true })
+    const user = await firebase.auth().currentUser
     await db
-      .collection("users")
+      .collection('users')
       .doc(user.uid)
       .get()
-      .then(fsUser => {
-        this.setState({ user: { id: fsUser.id, ...fsUser.data() } });
+      .then((fsUser) => {
+        this.setState({ user: { id: fsUser.id, ...fsUser.data() } })
       })
       .then(() => {
-        db.collection("users")
+        db.collection('users')
           .doc(user.uid)
-          .collection("tasks")
-          .orderBy("priority", "desc")
-          .orderBy("completed", "asc")
-          .orderBy("starred", "desc")
-          .onSnapshot(snapshot => {
+          .collection('tasks')
+          .orderBy('priority', 'desc')
+          .orderBy('completed', 'asc')
+          .orderBy('starred', 'desc')
+          .onSnapshot((snapshot) => {
             this.setState({
-              tasks: snapshot.docs.map(task => {
-                return { id: task.id, ...task.data() };
-              })
-            });
-          });
+              tasks: snapshot.docs.map((task) => {
+                return { id: task.id, ...task.data() }
+              }),
+            })
+          })
       })
       .then(() => {
-        db.collection("users")
+        db.collection('users')
           .doc(user.uid)
-          .onSnapshot(doc => {
+          .onSnapshot((doc) => {
             this.setState({
-              user: { id: doc.id, ...doc.data() }
-            });
+              user: { id: doc.id, ...doc.data() },
+            })
             document.body.style.backgroundColor = this.state.user.darkMode
-              ? "#464542"
-              : "white";
+              ? '#464542'
+              : 'white'
             document.body.style.color = this.state.user.darkMode
-              ? "white"
-              : "#464542";
-          });
-      });
+              ? 'white'
+              : '#464542'
+          })
+      })
 
-    this.setState({ isLoading: false });
+    this.setState({ isLoading: false })
   }
 
-  handleDelete = task => {
+  handleDelete = (task) => {
     try {
-      db.collection("users")
+      db.collection('users')
         .doc(this.state.user.id)
-        .collection("tasks")
+        .collection('tasks')
         .doc(task.id)
         .delete()
         .then(() => {
           this.setState({
             snackBarOpen: true,
-            snackBarVariant: "success",
-            snackBarMessage: "Task deleted!"
-          });
-        });
+            snackBarVariant: 'success',
+            snackBarMessage: 'Task deleted!',
+          })
+        })
     } catch (error) {
       this.setState({
         snackBarOpen: true,
-        snackBarVariant: "warning",
-        snackBarMessage: `Oops... ${error.message}`
-      });
+        snackBarVariant: 'warning',
+        snackBarMessage: `Oops... ${error.message}`,
+      })
     }
-  };
+  }
 
-  toggleChecked = item => {
+  toggleChecked = (item) => {
     try {
-      db.collection("users")
+      db.collection('users')
         .doc(this.state.user.id)
-        .collection("tasks")
+        .collection('tasks')
         .doc(item.id)
         .update({
-          completed: !item.completed
-        });
+          completed: !item.completed,
+        })
     } catch (error) {
       this.setState({
         snackBarOpen: true,
-        snackBarVariant: "warning",
-        snackBarMessage: `Oops... ${error.message}`
-      });
+        snackBarVariant: 'warning',
+        snackBarMessage: `Oops... ${error.message}`,
+      })
     }
-  };
+  }
 
-  toggleStarred = item => {
+  toggleStarred = (item) => {
     try {
-      db.collection("users")
+      db.collection('users')
         .doc(this.state.user.id)
-        .collection("tasks")
+        .collection('tasks')
         .doc(item.id)
         .update({
-          starred: !item.starred
-        });
+          starred: !item.starred,
+        })
     } catch (error) {
       this.setState({
         snackBarOpen: true,
-        snackBarVariant: "warning",
-        snackBarMessage: `Oops... ${error.message}`
-      });
+        snackBarVariant: 'warning',
+        snackBarMessage: `Oops... ${error.message}`,
+      })
     }
-  };
+  }
 
-  toggleWork = item => {
+  toggleGroceries = (item) => {
     try {
-      db.collection("users")
+      db.collection('users')
         .doc(this.state.user.id)
-        .collection("tasks")
+        .collection('tasks')
         .doc(item.id)
         .update({
-          work: !item.work
-        });
+          groceries: !item.groceries,
+        })
     } catch (error) {
       this.setState({
         snackBarOpen: true,
-        snackBarVariant: "warning",
-        snackBarMessage: `Oops... ${error.message}`
-      });
+        snackBarVariant: 'warning',
+        snackBarMessage: `Oops... ${error.message}`,
+      })
     }
-  };
+  }
 
   handleClose = (event, reason) => {
-    if (reason === "clickaway") {
-      return;
+    if (reason === 'clickaway') {
+      return
     }
     this.setState({
-      snackBarOpen: false
-    });
-  };
+      snackBarOpen: false,
+    })
+  }
 
   handleChange = (event, value) => {
     this.setState({
-      filter: value
-    });
-  };
+      filter: value,
+    })
+  }
 
   reorder = (list, startIndex, endIndex) => {
-    const result = Array.from(list);
-    const [removed] = result.splice(startIndex, 1);
-    result.splice(endIndex, 0, removed);
+    const result = Array.from(list)
+    const [removed] = result.splice(startIndex, 1)
+    result.splice(endIndex, 0, removed)
 
-    return result;
-  };
+    return result
+  }
 
-  onDragEnd = result => {
+  onDragEnd = (result) => {
     if (!result.destination) {
-      return;
+      return
     }
 
     const tasks = this.reorder(
       this.state.tasks,
       result.source.index,
       result.destination.index
-    );
+    )
 
     this.setState({
-      tasks
-    });
+      tasks,
+    })
     // * Save this ordering somehow to user profile and then recreate the state from that order
-  };
+  }
 
-  filterTasks = tasks => {
+  filterTasks = (tasks) => {
     switch (this.state.filter) {
       case 0:
-        return tasks;
+        return tasks
       case 1:
-        return tasks.filter(task => !task.completed);
+        return tasks.filter((task) => !task.completed)
       case 2:
-        return tasks.filter(task => task.starred);
+        return tasks.filter((task) => task.starred)
       case 3:
-        return tasks.filter(task => task.work);
-      case 4:
-        return tasks.filter(task => task.starred && task.work && !task.completed);
+        return tasks.filter((task) => task.groceries)
       default:
-        return tasks;
-    }
-  };
-
-  handleDarkModeToggle = event => {
-    try {
-      db.collection("users")
-        .doc(this.state.user.id)
-        .update({
-          darkMode: !this.state.user.darkMode
-        });
-    } catch (error) {
-      this.setState({
-        snackBarOpen: true,
-        snackBarVariant: "warning",
-        snackBarMessage: `Oops... ${error.message}`
-      });
-    }
-  };
-
-  incrementPriority = item => {
-    try {
-      db.collection("users")
-        .doc(this.state.user.id)
-        .collection("tasks")
-        .doc(item.id)
-        .update({
-          priority: (isNaN(item.priority) ? 0 : item.priority) + 1
-        });
-    } catch (error) {
-      this.setState({
-        snackBarOpen: true,
-        snackBarVariant: "warning",
-        snackBarMessage: `Oops... ${error.message}`
-      });
+        return tasks
     }
   }
 
-  decrementPriority = item => {
+  handleDarkModeToggle = (event) => {
     try {
-      db.collection("users")
-        .doc(this.state.user.id)
-        .collection("tasks")
-        .doc(item.id)
-        .update({
-          priority: (isNaN(item.priority) ? 0 : item.priority) - 1
-        });
+      db.collection('users').doc(this.state.user.id).update({
+        darkMode: !this.state.user.darkMode,
+      })
     } catch (error) {
       this.setState({
         snackBarOpen: true,
-        snackBarVariant: "warning",
-        snackBarMessage: `Oops... ${error.message}`
-      });
+        snackBarVariant: 'warning',
+        snackBarMessage: `Oops... ${error.message}`,
+      })
+    }
+  }
+
+  incrementPriority = (item) => {
+    try {
+      db.collection('users')
+        .doc(this.state.user.id)
+        .collection('tasks')
+        .doc(item.id)
+        .update({
+          priority: (isNaN(item.priority) ? 0 : item.priority) + 1,
+        })
+    } catch (error) {
+      this.setState({
+        snackBarOpen: true,
+        snackBarVariant: 'warning',
+        snackBarMessage: `Oops... ${error.message}`,
+      })
+    }
+  }
+
+  decrementPriority = (item) => {
+    try {
+      db.collection('users')
+        .doc(this.state.user.id)
+        .collection('tasks')
+        .doc(item.id)
+        .update({
+          priority: (isNaN(item.priority) ? 0 : item.priority) - 1,
+        })
+    } catch (error) {
+      this.setState({
+        snackBarOpen: true,
+        snackBarVariant: 'warning',
+        snackBarMessage: `Oops... ${error.message}`,
+      })
     }
   }
 
   render() {
-    const { classes } = this.props;
+    const { classes } = this.props
     if (this.state.isLoading) {
       return (
         <Spinner
@@ -274,11 +270,11 @@ class TaskList extends Component {
           color="primary"
           className="center"
         />
-      );
+      )
     }
     return this.state.tasks.length ? (
       <div>
-        <CreateTask filter={this.state.filter}/>
+        <CreateTask filter={this.state.filter} />
 
         <FormControlLabel
           control={
@@ -302,8 +298,8 @@ class TaskList extends Component {
           <Tab label="All" disableRipple />
           <Tab label="Incomplete" disableRipple />
           <Tab label="Starred" disableRipple />
-          <Tab label="Work" disableRipple />
-          <Tab label="Critical" disableRipple />
+          <Tab label="Shop" disableRipple />
+          {/* <Tab label="Critical" disableRipple /> */}
         </Tabs>
         <div>
           <DragDropContext onDragEnd={this.onDragEnd}>
@@ -330,11 +326,15 @@ class TaskList extends Component {
                             handleDelete={() => this.handleDelete(item)}
                             toggleChecked={() => this.toggleChecked(item)}
                             toggleStarred={() => this.toggleStarred(item)}
-                            toggleWork={() => this.toggleWork(item)}
+                            toggleGroceries={() => this.toggleGroceries(item)}
                             user={this.state.user}
                             darkMode={this.state.darkMode}
-                            incrementPriority={() => this.incrementPriority(item)}
-                            decrementPriority={() => this.decrementPriority(item)}
+                            incrementPriority={() =>
+                              this.incrementPriority(item)
+                            }
+                            decrementPriority={() =>
+                              this.decrementPriority(item)
+                            }
                           />
                         </div>
                       )}
@@ -348,8 +348,8 @@ class TaskList extends Component {
         </div>
         <Snackbar
           anchorOrigin={{
-            vertical: "bottom",
-            horizontal: "left"
+            vertical: 'bottom',
+            horizontal: 'left',
           }}
           open={this.state.snackBarOpen}
           autoHideDuration={2000}
@@ -377,12 +377,12 @@ class TaskList extends Component {
           className="center"
         />
       </div>
-    );
+    )
   }
 }
 
 TaskList.propTypes = {
-  classes: PropTypes.object.isRequired
-};
+  classes: PropTypes.object.isRequired,
+}
 
-export default withStyles(styles)(withAuth(TaskList));
+export default withStyles(styles)(withAuth(TaskList))
